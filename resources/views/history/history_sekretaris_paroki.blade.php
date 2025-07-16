@@ -532,7 +532,7 @@
             </h3>
 
             {{-- Form Filter dan Pencarian --}}
-            <form action="{{ route('bendahara-paroki.laporan.history.bendahara-paroki') }}" method="GET" class="mb-6 bg-gray-50 p-4 rounded-lg shadow-inner grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 items-end filter-form-grid print-hidden">
+            <form action="{{ route('sekretaris-paroki.laporan.history.sekretaris-paroki') }}" method="GET" class="mb-6 bg-gray-50 p-4 rounded-lg shadow-inner grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 items-end filter-form-grid print-hidden">
                 <div>
                     <label for="search" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Cari (Nama Pengirim/Stasi)</label>
                     <input type="text" name="search" id="search" placeholder="Cari laporan..."
@@ -569,7 +569,7 @@
                         </svg>
                         Terapkan Filter
                     </button>
-                    <a href="{{ route('bendahara-paroki.laporan.history.bendahara-paroki') }}" class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <a href="{{ route('sekretaris-paroki.laporan.history.sekretaris-paroki') }}" class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586l-1.293-1.293z" />
                         </svg>
