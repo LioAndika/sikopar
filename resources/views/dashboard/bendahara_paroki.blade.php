@@ -67,8 +67,7 @@
             background-color: white; /* Background putih untuk sidebar utama */
             color: #334155; /* Default text color, sesuaikan jika perlu */
         }
-   
-
+    
         /* Mobile-specific styles for the hamburger menu and header */
         @media (max-width: 767px) { /* Tailwind's 'md' breakpoint is 768px, so less than that is mobile */
             .sidebar-container {
@@ -76,7 +75,7 @@
                 top: 0;
                 left: 0;
                 height: 100%;
-                width: 200px; /* DIKECILKAN: Lebar sidebar di mode HP */
+                width: 250px; /* Lebar sidebar di mode HP */
                 transform: translateX(-100%);
                 transition: transform 0.3s ease-in-out;
                 z-index: 21; /* Ensure sidebar is above header */
@@ -101,7 +100,7 @@
             }
             /* Adjusted padding for the body to ensure header content is visible */
             body {
-                padding-top: 3rem; /* DIKECILKAN: Sesuaikan padding-top untuk memberi ruang pada header yang lebih kecil */
+                padding-top: 4rem; /* Sesuaikan padding-top untuk memberi ruang pada header */
             }
             header {
                 position: fixed;
@@ -110,15 +109,15 @@
                 width: 100%;
                 z-index: 10; /* Ensure header is above main content */
                 background-color: white; /* Ensure header has a background */
-                padding: 0.5rem 0.75rem; /* DIKECILKAN: Adjusted header padding for mobile to be smaller */
+                padding: 0.75rem 1rem; /* Adjusted header padding for mobile */
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 border-bottom: 1px solid #e2e8f0; /* Optional: add a border to header */
-                margin-bottom: 0.75rem; /* Memberi jarak bawah header di mobile */
+                margin-bottom: 1rem; /* Memberi jarak bawah header di mobile */
             }
             header h1 {
-                font-size: 1rem; /* DIKECILKAN: Further reduced font size for mobile header */
+                font-size: 1rem; /* Reduced font size for mobile header */
                 font-weight: bold;
                 color: #374151; /* Match general text color */
             }
@@ -129,15 +128,15 @@
                 justify-content: center;
             }
             .mobile-avatar {
-                width: 1.8rem; /* DIKECILKAN: Size of the circular avatar */
-                height: 1.8rem; /* DIKECILKAN: Size of the circular avatar */
+                width: 2.2rem; /* Size of the circular avatar */
+                height: 2.2rem; /* Size of the circular avatar */
                 background-color: #3B82F6; /* Blue background */
                 color: white; /* White text for initials */
                 border-radius: 50%; /* Make it circular */
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 0.6rem; /* DIKECILKAN: Font size for initials */
+                font-size: 0.75rem; /* Font size for initials */
                 font-weight: bold;
                 text-transform: uppercase; /* Ensure initials are uppercase */
             }
@@ -150,60 +149,59 @@
             /* Ensure the main content doesn't have an additional top padding on mobile */
             .main-content {
                 padding-top: 0;
-                padding-left: 0.75rem; /* DIKECILKAN: Tambahkan sedikit padding kiri dan kanan */
-                padding-right: 0.75rem; /* DIKECILKAN: Tambahkan sedikit padding kiri dan kanan */
+                padding-left: 1rem; /* Tambahkan sedikit padding kiri dan kanan */
+                padding-right: 1rem; /* Tambahkan sedikit padding kiri dan kanan */
+                margin-top:10px;
             }
             
+            .bg-white.p-8.rounded-xl.shadow-lg.col-span-full.mb-8.mt-3.card-hover-effect h1 {
+                font-size: 1rem; /* Judul papan pengumuman lebih kecil */
+            }
+            .bg-white.p-8.rounded-xl.shadow-lg.col-span-full.mb-8.mt-3.card-hover-effect h1 svg {
+                width: 1.8rem; /* Ikon lebih kecil */
+                height: 1.8rem;
+                margin-right: 0.5rem; /* Jarak ikon ke teks lebih kecil */
+            }
+            .prose p.whitespace-pre-line.leading-relaxed {
+                font-size: 0.8rem; /* Konten pengumuman lebih kecil */
+            }
+            .prose p.text-sm.text-gray-500.mt-3.italic {
+                font-size: 0.7rem; /* Info pembuat lebih kecil */
+            }
+            .prose p.text-gray-500:not([class*="text-sm"]) {
+                font-size: 0.8rem; /* Teks "belum ada pengumuman" lebih kecil */
+            }
 
-.bg-white.p-8.rounded-xl.shadow-lg.col-span-full.mb-8.mt-3.card-hover-effect h1 {
-        font-size: 0.7rem; /* Judul papan pengumuman lebih kecil */
-    }
-    .bg-white.p-8.rounded-xl.shadow-lg.col-span-full.mb-8.mt-3.card-hover-effect h1 svg {
-        width: 1.5rem; /* Ikon lebih kecil */
-        height: 1.5rem;
-        margin-right: 0.4rem; /* Jarak ikon ke teks lebih kecil */
-    }
-    .prose p.whitespace-pre-line.leading-relaxed {
-        font-size: 0.6rem; /* Konten pengumuman lebih kecil */
-    }
-    .prose p.text-sm.text-gray-500.mt-3.italic {
-        font-size: 0.6rem; /* Info pembuat lebih kecil */
-    }
-    .prose p.text-gray-500:not([class*="text-sm"]) {
-        font-size: 0.6rem; /* Teks "belum ada pengumuman" lebih kecil */
-    }
-
-    .grid h3 {
-        font-size: 0.7rem; /* Judul sedikit lebih kecil di mobile */
-    }
-    .grid p.text-sm.text-gray-600 {
-        font-size: 0.6rem; /* Deskripsi lebih kecil di mobile */
-    }
-    .grid p.text-3xl.font-bold {
-        font-size: 1rem; /* Angka jumlah lebih kecil di mobile */
-    }
-    .grid a.mt-4 {
-        padding: 0.4rem 1rem; /* Tombol lebih kecil di mobile */
-        font-size: 0.6rem; /* Teks tombol lebih kecil di mobile */
-    }
-                   /* Ukuran font untuk sidebar items di HP */
+            .grid h3 {
+                font-size: 1rem; /* Judul sedikit lebih kecil di mobile */
+            }
+            .grid p.text-sm.text-gray-600 {
+                font-size: 0.8rem; /* Deskripsi lebih kecil di mobile */
+            }
+            .grid p.text-3xl.font-bold {
+                font-size: 1.8rem; /* Angka jumlah lebih kecil di mobile */
+            }
+            .grid a.mt-4 {
+                padding: 0.6rem 1.2rem; /* Tombol lebih kecil di mobile */
+                font-size: 0.8rem; /* Teks tombol lebih kecil di mobile */
+            }
+            /* Ukuran font untuk sidebar items di HP */
             .sidebar-item {
-                font-size: 0.85rem; /* DIKECILKAN: Ukuran font item sidebar */
-                padding: 0.6rem 1rem; /* DIKECILKAN: Padding item sidebar */
+                font-size: 0.9rem; /* Ukuran font item sidebar */
+                padding: 0.7rem 1.2rem; /* Padding item sidebar */
             }
 
             /* Ukuran logo dan teks SIKOPAR di HP */
             .sidebar-brand img {
-                height: 2rem; /* DIKECILKAN: Ukuran tinggi logo */
-                width: 2rem; /* DIKECILKAN: Ukuran lebar logo */
-                margin-right: 0.5rem; /* DIKECILKAN: Jarak antara logo dan teks */
+                height: 2.2rem; /* Ukuran tinggi logo */
+                width: 2.2rem; /* Ukuran lebar logo */
+                margin-right: 0.6rem; /* Jarak antara logo dan teks */
             }
             .sidebar-brand {
-                font-size: 1.5rem; /* DIKECILKAN: Ukuran font SIKOPAR */
-                padding-top: 0.75rem; /* DIKECILKAN */
-                padding-bottom: 0.75rem; /* DIKECILKAN */
+                font-size: 1.6rem; /* Ukuran font SIKOPAR */
+                padding-top: 1rem;
+                padding-bottom: 1rem;
             }
-    
         }
 
         /* Desktop specific styles - reset mobile overrides */
@@ -211,7 +209,7 @@
             body {
                 padding-top: 0 !important; /* Reset body padding for desktop */
             }
-            header {
+           header {
                 position: relative !important;
                 /* PENGECILAN HEADER DI DESKTOP (sudah dilakukan sebelumnya) */
                 padding: 0.75rem 1.5rem !important;
@@ -229,40 +227,59 @@
                 display: none !important; /* Hide mobile welcome on desktop */
             }
             header .desktop-welcome {
-                display: flex !important; /* Show desktop welcome on desktop */
+                display: none !important; /* Show desktop welcome on desktop */
                 align-items: center; /* Vertically align items in desktop welcome */
             }
             header .desktop-welcome span {
                 font-size: 0.95rem; /* Slightly smaller welcome text for desktop */
             }
+        }
             /* Styling for desktop avatar - if you want a separate avatar on desktop too */
             .desktop-avatar {
-                width: 2.5rem; /* Size of the circular avatar */
-                height: 2.5rem;
+                width: 2.8rem; /* Size of the circular avatar */
+                height: 2.8rem;
                 background-color: #3B82F6; /* Blue background */
                 color: white; /* White text for initials */
                 border-radius: 50%; /* Make it circular */
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 0.85rem; /* Font size for initials */
+                font-size: 0.9rem; /* Font size for initials */
                 font-weight: bold;
                 text-transform: uppercase; /* Ensure initials are uppercase */
-                margin-left: 0.75rem; /* Space between text and avatar */
+                margin-left: 0.85rem; /* Space between text and avatar */
             }
-             .grid h3 {
-        font-size: 0.7rem; /* Judul sedikit lebih kecil di mobile */
-    }
-    .grid p.text-sm.text-gray-600 {
-        font-size: 0.6rem; /* Deskripsi lebih kecil di mobile */
-    }
-    .grid p.text-3xl.font-bold {
-        font-size: 1rem; /* Angka jumlah lebih kecil di mobile */
-    }
-    .grid a.mt-4 {
-        padding: 0.4rem 1rem; /* Tombol lebih kecil di mobile */
-        font-size: 0.6rem; /* Teks tombol lebih kecil di mobile */
-    }
+            /* Reset card content sizes for desktop to original or slightly larger */
+            .bg-white.p-8.rounded-xl.shadow-lg.col-span-full.mb-8.mt-3.card-hover-effect h1 {
+                font-size: 1.25rem; /* Original size for desktop announcement title */
+            }
+            .bg-white.p-8.rounded-xl.shadow-lg.col-span-full.mb-8.mt-3.card-hover-effect h1 svg {
+                width: 1.8rem; /* Original icon size for desktop */
+                height: 1.8rem;
+                margin-right: 0.5rem; /* Original icon spacing for desktop */
+            }
+            .prose p.whitespace-pre-line.leading-relaxed {
+                font-size: 0.9rem; /* Original content size for desktop */
+            }
+            .prose p.text-sm.text-gray-500.mt-3.italic {
+                font-size: 0.8rem; /* Original info size for desktop */
+            }
+            .prose p.text-gray-500:not([class*="text-sm"]) {
+                font-size: 0.9rem; /* Original "no announcement" size for desktop */
+            }
+            .grid h3 {
+                font-size: 1.25rem; /* Original size for card titles on desktop */
+            }
+            .grid p.text-sm.text-gray-600 {
+                font-size: 0.875rem; /* Original description size for desktop */
+            }
+            .grid p.text-3xl.font-bold {
+                font-size: 2.25rem; /* Original number size for desktop */
+            }
+            .grid a.mt-4 {
+                padding: 0.75rem 1.5rem; /* Original button padding for desktop */
+                font-size: 0.875rem; /* Original button text size for desktop */
+            }
         }
     </style>
 </head>
@@ -298,8 +315,8 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg> {{-- Ikon untuk Riwayat --}}
             Riwayat Laporan Final
         </a>
-       {{-- LOGOUT BUTTON --}}
-            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();" class="sidebar-item hover:bg-red-700 mt-4">
+        {{-- LOGOUT BUTTON --}}
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();" class="sidebar-item hover:bg-red-700 hover:text-white mt-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                 @if(Auth::user()->hasRole('super-admin'))
                     Kembali ke Dashboard Utama
@@ -382,7 +399,7 @@
             </div>
         @endif
 
-     <div class="bg-white p-8 rounded-xl shadow-lg col-span-full mb-8 mt-3 card-hover-effect">
+       <div class="bg-white p-8 rounded-xl shadow-lg col-span-full mb-8 mt-3 card-hover-effect">
             <h1 class="text-xl font-semibold text-gray-800 mb-5 border-b pb-3 border-gray-200 flex items-center">
                 <svg class="w-6 h-6 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                 Papan Pengumuman Kolekte
@@ -400,7 +417,7 @@
 
                 @if ($announcement)
                     <p class="whitespace-pre-line leading-relaxed">{{ $announcement->content }}</p>
-                    <p class="text-sm text-gray-500 mt-3 italic">Dibuat oleh: {{ $announcement->user->name ?? 'N/A' }} pada: {{ $announcement->updated_at->format('d M Y H:i') }}</p>                @else
+                    <p class="text-sm text-gray-500 mt-3 italic">Dibuat oleh: {{ $announcement->user->name ?? 'N/A' }} pada: {{ $announcement->updated_at->format('d M Y H:i') }}</p>                 @else
                     <p class="text-gray-500">Belum ada pengumuman terbaru saat ini.</p>
                 @endif
             </div>

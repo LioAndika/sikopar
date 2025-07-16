@@ -67,7 +67,7 @@
             background-color: white; /* Background putih untuk sidebar utama */
             color: #334155; /* Default text color, sesuaikan jika perlu */
         }
-   
+    
 
         /* Mobile-specific styles for the hamburger menu and header */
         @media (max-width: 767px) { /* Tailwind's 'md' breakpoint is 768px, so less than that is mobile */
@@ -156,54 +156,54 @@
 
             /* Ukuran teks untuk judul h3 di dalam kartu "Papan Pengumuman Kolekte" */
             .bg-white.p-8.rounded-xl.shadow-lg.col-span-full h3 {
-                font-size: 1rem; /* Mengurangi ukuran judul di mobile */
+                font-size: 1.125rem; /* Menaikkan ukuran judul di mobile dari 1rem ke 1.125rem (setara dengan text-lg) */
             }
 
             /* Ukuran teks untuk konten pengumuman */
             .bg-white.p-8.rounded-xl.shadow-lg.col-span-full .prose p {
-                font-size: 0.75rem; /* Sedikit lebih kecil untuk konten di mobile */
+                font-size: 0.875rem; /* Menaikkan ukuran konten di mobile dari 0.75rem ke 0.875rem (setara dengan text-sm) */
                 line-height: 1.6;
             }
 
             /* Ukuran teks untuk informasi 'Dibuat oleh:' di pengumuman */
             .bg-white.p-8.rounded-xl.shadow-lg.col-span-full .text-sm.text-gray-500 {
-                font-size: 0.65rem; /* Lebih kecil lagi untuk informasi tambahan di mobile */
+                font-size: 0.75rem; /* Menaikkan ukuran info tambahan di mobile dari 0.65rem ke 0.75rem (setara dengan text-xs, namun di sini untuk clarity dibuat 0.75rem) */
             }
 
             /* Ukuran teks untuk judul h3 di kartu "Laporan Menunggu Validasi" */
             .grid > div.bg-white.p-6.rounded-xl.shadow-lg h3 {
-                font-size: 1rem; /* Ukuran judul kartu lain di mobile */
+                font-size: 1.125rem; /* Menaikkan ukuran judul kartu lain di mobile dari 1rem ke 1.125rem (setara dengan text-lg) */
             }
 
             /* Ukuran teks untuk deskripsi di kartu "Laporan Menunggu Validasi" */
             .grid > div.bg-white.p-6.rounded-xl.shadow-lg p {
-                font-size: 0.75rem; /* Ukuran deskripsi kartu lain di mobile */
+                font-size: 0.875rem; /* Menaikkan ukuran deskripsi kartu lain di mobile dari 0.75rem ke 0.875rem (setara dengan text-sm) */
             }
 
             /* Ukuran teks untuk tombol "Lihat Laporan" */
             .grid > div.bg-white.p-6.rounded-xl.shadow-lg a.inline-block {
-                font-size: 0.75rem; /* Ukuran tombol di mobile */
-                padding-top: 0.6rem;
-                padding-bottom: 0.6rem;
-                padding-left: 1.2rem;
-                padding-right: 1.2rem;
+                font-size: 0.875rem; /* Menaikkan ukuran tombol di mobile dari 0.75rem ke 0.875rem (setara dengan text-sm) */
+                padding-top: 0.7rem; /* Menyesuaikan padding */
+                padding-bottom: 0.7rem; /* Menyesuaikan padding */
+                padding-left: 1.4rem; /* Menyesuaikan padding */
+                padding-right: 1.4rem; /* Menyesuaikan padding */
             }
-                 /* Ukuran font untuk sidebar items di HP */
+            /* Ukuran font untuk sidebar items di HP */
             .sidebar-item {
-                font-size: 0.85rem; /* DIKECILKAN: Ukuran font item sidebar */
-                padding: 0.6rem 1rem; /* DIKECILKAN: Padding item sidebar */
+                font-size: 0.95rem; /* Menaikkan ukuran font item sidebar dari 0.85rem */
+                padding: 0.7rem 1.2rem; /* Menyesuaikan padding item sidebar */
             }
 
             /* Ukuran logo dan teks SIKOPAR di HP */
             .sidebar-brand img {
-                height: 2rem; /* DIKECILKAN: Ukuran tinggi logo */
-                width: 2rem; /* DIKECILKAN: Ukuran lebar logo */
-                margin-right: 0.5rem; /* DIKECILKAN: Jarak antara logo dan teks */
+                height: 2.2rem; /* Menaikkan ukuran tinggi logo dari 2rem */
+                width: 2.2rem; /* Menaikkan ukuran lebar logo dari 2rem */
+                margin-right: 0.6rem; /* Menyesuaikan jarak antara logo dan teks */
             }
             .sidebar-brand {
-                font-size: 1.5rem; /* DIKECILKAN: Ukuran font SIKOPAR */
-                padding-top: 0.75rem; /* DIKECILKAN */
-                padding-bottom: 0.75rem; /* DIKECILKAN */
+                font-size: 1.6rem; /* Menaikkan ukuran font SIKOPAR dari 1.5rem */
+                padding-top: 0.85rem; /* Menyesuaikan */
+                padding-bottom: 0.85rem; /* Menyesuaikan */
             }
             
             /* --- END: KODE BARU UNTUK UKURAN TEKS KARTU KHUSUS MOBILE --- */
@@ -216,7 +216,7 @@
             body {
                 padding-top: 0 !important; /* Reset body padding for desktop */
             }
-             header {
+            header {
                 position: relative !important;
                 /* PENGECILAN HEADER DI DESKTOP (sudah dilakukan sebelumnya) */
                 padding: 0.75rem 1.5rem !important;
@@ -238,23 +238,24 @@
                 align-items: center; /* Vertically align items in desktop welcome */
             }
             header .desktop-welcome span {
-                font-size: 0.95rem; /* Slightly smaller welcome text for desktop */
+                font-size: 0.9rem; /* DIKECILKAN: Font size teks selamat datang */
             }
-            /* Styling for desktop avatar - if you want a separate avatar on desktop too */
+            /* Styling for desktop avatar */
             .desktop-avatar {
-                width: 2.5rem; /* Size of the circular avatar */
-                height: 2.5rem;
+                width: 2.2rem; /* DIKECILKAN: Ukuran avatar desktop */
+                height: 2.2rem;
                 background-color: #3B82F6; /* Blue background */
                 color: white; /* White text for initials */
                 border-radius: 50%; /* Make it circular */
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 0.85rem; /* Font size for initials */
+                font-size: 0.7rem; /* DIKECILKAN: Font size for initials */
                 font-weight: bold;
                 text-transform: uppercase; /* Ensure initials are uppercase */
                 margin-left: 0.75rem; /* Space between text and avatar */
             }
+
 
             .sidebar-container {
                 width: 256px; /* Default sidebar width for desktop */

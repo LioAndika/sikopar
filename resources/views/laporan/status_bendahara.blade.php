@@ -69,15 +69,13 @@
         /* Penyesuaian untuk tabel agar terlihat lebih modern */
         .table-responsive {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 0.75rem; /* rounded-xl */
-            overflow: hidden; /* Ensure rounded corners clip content */
+            /* border-radius: 0.75rem; */ /* HAPUS border-radius untuk sudut kotak */
+            overflow: hidden; /* Ensure content is clipped */
             overflow-x: auto; /* Ini penting untuk scroll horizontal */
-            /* Di desktop, ini akan menyesuaikan dengan lebar parentnya. */
-            /* Di mobile, akan memungkinkan scroll jika tabel terlalu lebar. */
         }
 
         .modern-table {
-            min-width: 600px; /* **PERUBAHAN: Atur lebar minimum lebih besar agar kolom tidak terlalu sempit di mobile** */
+            min-width: 700px; /* **PERUBAHAN: Atur lebar minimum lebih besar lagi untuk mobile** */
             width: 100%; /* Pastikan tabel selalu mencoba mengisi 100% dari parentnya */
             font-size: 0.875rem; /* text-sm untuk seluruh tabel */
         }
@@ -89,13 +87,13 @@
             text-transform: uppercase;
             letter-spacing: 0.05em; /* tracking-wider */
             border-bottom: 2px solid #cbd5e0; /* border-gray-300 */
-            padding: 0.75rem 1rem; /* **PERUBAHAN: py-3 px-4, sedikit lebih besar dari py-2 px-4 sebelumnya** */
-            font-size: 0.75rem; /* **PERUBAHAN: text-xs untuk header tabel di mobile** */
+            padding: 0.75rem 1rem; /* py-3 px-4, sedikit lebih besar dari py-2 px-4 sebelumnya */
+            font-size: 0.75rem; /* text-xs untuk header tabel di mobile */
         }
         .modern-table tbody td {
-            padding: 0.75rem 1rem; /* **PERUBAHAN: py-3 px-4, sedikit lebih besar dari py-2 px-4 sebelumnya** */
+            padding: 0.75rem 1rem; /* py-3 px-4, sedikit lebih besar dari py-2 px-4 sebelumnya */
             border-bottom: 1px solid #edf2f7; /* border-gray-200 */
-            font-size: 0.75rem; /* **PERUBAHAN: text-xs untuk sel tabel di mobile** */
+            font-size: 0.75rem; /* text-xs untuk sel tabel di mobile */
         }
         .modern-table tbody tr:last-child td {
             border-bottom: none; /* No border for the last row */
@@ -107,9 +105,9 @@
         .status-badge {
             display: inline-flex;
             align-items: center;
-            padding: 0.2rem 0.5rem; /* **PERUBAHAN: Padding lebih kecil lagi untuk badge** */
+            padding: 0.2rem 0.5rem; /* Padding lebih kecil lagi untuk badge */
             border-radius: 9999px; /* full rounded */
-            font-size: 0.625rem; /* **PERUBAHAN: text-xs, lebih kecil dari text-sm, bahkan lebih kecil dari sebelumnya** */
+            font-size: 0.625rem; /* text-xs, lebih kecil dari text-sm, bahkan lebih kecil dari sebelumnya */
             font-weight: 600; /* font-semibold */
             line-height: 1;
             white-space: nowrap;
@@ -192,7 +190,7 @@
                 margin-right: 0.5rem; /* Kurangi margin burger button */
                 padding: 0.5rem; /* Kurangi padding burger button */
             }
-                  .main-content {
+            .main-content {
                 padding-top: 0;
                 padding-left: 0.75rem; /* DIKECILKAN: Tambahkan sedikit padding kiri dan kanan */
                 padding-right: 0.75rem; /* DIKECILKAN: Tambahkan sedikit padding kiri dan kanan */
@@ -201,29 +199,29 @@
 
             /* Kartu yang membungkus tabel */
             .bg-white.p-8.rounded-xl.shadow-md.card-hover-effect {
-                padding: 0.5rem !important; /* Padding card dikurangi */
+                padding: 1rem !important; /* **PERUBAHAN: Padding card ditingkatkan untuk memberi ruang pada tabel** */
                 width: 100%;
                 box-sizing: border-box;
+                border-radius: 0; /* **PERUBAHAN: Menjadikan sudut card kotak** */
             }
 
             /* Tabel responsif akan discroll */
             .table-responsive {
                 width: 100%;
                 box-sizing: border-box;
-                /* overflow-x: auto;  Sudah diatur di CSS global, tidak perlu di sini */
             }
             /* Sesuaikan ukuran font di dalam tabel untuk mobile */
             .modern-table thead th,
             .modern-table tbody td {
                 font-size: 0.7rem; /* Lebih kecil lagi untuk sel dan header tabel */
-                padding: 0.2rem 0.3rem; /* Padding sel tabel lebih kecil */
+                padding: 0.4rem 0.6rem; /* **PERUBAHAN: Padding sel tabel sedikit ditingkatkan** */
             }
             .status-badge {
                 font-size: 0.55rem; /* Badge lebih kecil lagi */
                 padding: 0.15rem 0.4rem;
             }
-        
-             /* Ukuran font untuk sidebar items di HP */
+            
+            /* Ukuran font untuk sidebar items di HP */
             .sidebar-item {
                 font-size: 0.85rem; /* DIKECILKAN: Ukuran font item sidebar */
                 padding: 0.6rem 1rem; /* DIKECILKAN: Padding item sidebar */
@@ -274,6 +272,7 @@
             .bg-white.p-8.rounded-xl.shadow-md.card-hover-effect {
                 padding: 2rem !important; /* Padding card kembali ke desktop */
                 width: auto !important;
+                border-radius: 0.75rem !important; /* Kembali ke sudut melengkung di desktop */
             }
             .modern-table {
                 min-width: auto; /* Reset min-width di desktop */

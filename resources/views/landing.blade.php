@@ -61,27 +61,27 @@
         /* Responsive Adjustments */
         @media (max-width: 767px) { /* Adjustments for screens smaller than 'md' breakpoint */
             .hero-section {
-                height: 60vh; /* Make hero section a bit shorter on mobile */
+                height: 40vh; /* Make hero section a bit shorter on mobile (perkecil gambar bagian pertama) */
             }
 
             /* Navbar Adjustments */
             nav {
-                padding: 1rem; /* Adjust padding for mobile navbar */
+                padding: 0.75rem 1rem; /* Adjust padding for mobile navbar */
             }
             .navbar-brand img {
-                height: 2.5rem; /* Slightly smaller logo on mobile */
-                width: 2.5rem;
+                height: 2rem; /* Slightly smaller logo on mobile */
+                width: 2rem;
                 margin-right: 0.5rem; /* Reduce margin */
             }
             .navbar-brand span {
-                font-size: 0.6rem; /* Smaller font for brand name on mobile */
+                font-size: 0.7rem; /* Smaller font for brand name on mobile */
                 white-space: normal; /* Allow wrapping of brand name */
                 line-height: 1.2; /* Adjust line height for wrapped text */
                 text-align: left; /* Align text left */
             }
             .navbar-nav .login-button {
-                padding: 0.4rem 0.4rem; /* Smaller padding for button */
-                font-size: 0.4rem; /* Smaller font for button */
+                padding: 0.3rem 0.6rem; /* Smaller padding for button */
+                font-size: 0.5rem; /* Smaller font for button */
                 white-space: nowrap; /* Prevent button text wrapping */
             }
 
@@ -90,11 +90,11 @@
                 padding: 1rem; /* Reduce padding on mobile */
             }
             .overlay-text h1 {
-                font-size: 0.8rem; /* Adjust h1 font size for mobile */
+                font-size: 1rem; /* Adjust h1 font size for mobile */
                 margin-bottom: 0.25rem; /* Reduce margin */
             }
             .overlay-text p {
-                font-size: 0.5rem; /* Adjust p font size for mobile */
+                font-size: 0.7rem; /* Adjust p font size for mobile */
             }
 
             /* Main content section adjustments */
@@ -115,36 +115,40 @@
             }
             /* Mengurangi tinggi gambar di dalam card */
             .card-hover-effect img {
-                height: 10rem; /* Mengurangi tinggi gambar di dalam card dari h-48 (12rem) */
+                height: 8rem; /* Mengurangi tinggi gambar di dalam card dari h-48 (12rem) */
             }
             /* Mengurangi ukuran judul card */
             .card-hover-effect h3 {
-                font-size: 1.5rem; /* Mengurangi ukuran judul card dari text-2xl (1.5rem) */
-                margin-bottom: 0.75rem; /* Sesuaikan margin bawah judul */
+                font-size: 1.25rem; /* Mengurangi ukuran judul card dari text-2xl (1.5rem) */
+                margin-bottom: 0.5rem; /* Sesuaikan margin bawah judul */
             }
             /* Mengurangi ukuran paragraf di card */
             .card-hover-effect p {
-                font-size: 0.9rem; /* Mengurangi ukuran paragraf di card */
+                font-size: 0.8rem; /* Mengurangi ukuran paragraf di card */
             }
             /* Mengurangi ukuran teks link "Klik Disini" di card */
             .card-hover-effect a {
-                font-size: 0.9rem; /* Mengurangi ukuran teks link di card */
+                font-size: 0.8rem; /* Mengurangi ukuran teks link di card */
             }
             /* --- END: PENYESUAIAN CARD BARU UNTUK MOBILE --- */
 
 
-            /* Jadwal Misa alignment - STACK VERTICALLY ON MOBILE */
-            .card-jadwal-misa .misa-times {
-                flex-direction: column; /* Stack times vertically on mobile */
-                align-items: center; /* Center horizontally */
+            /* Jadwal Misa alignment for Mobile */
+            .misa-entry {
+                display: flex; /* Gunakan flexbox untuk setiap baris */
+                justify-content: space-between; /* Menjaga teks hari di kiri dan waktu di kanan */
+                width: 100%; /* Memastikan setiap baris mengambil lebar penuh */
+                margin-bottom: 0.2rem; /* Jarak antar baris */
             }
-            .card-jadwal-misa .misa-times > div {
-                margin: 0.5rem 0; /* Adjust vertical spacing */
-                text-align: center; /* Center text within each time block */
+            .misa-day {
+                text-align: left;
+                flex-basis: 55%; /* Beri ruang lebih untuk teks hari */
+                font-size: 0.9rem; /* Ukuran font lebih kecil */
             }
-            .card-jadwal-misa .misa-times > div h5 {
-                text-align: center; /* Ensure text within columns is centered */
-                font-size: 1rem; /* Perkecil font untuk waktu misa */
+            .misa-time {
+                text-align: right; /* Jam di kanan */
+                flex-basis: 45%; /* Sisa ruang untuk jam */
+                font-size: 0.9rem; /* Ukuran font lebih kecil */
             }
 
 
@@ -169,17 +173,17 @@
             .footer-brand h2 {
                 margin-left: auto; /* Center text below logo */
                 margin-right: auto;
-                font-size: 1.1rem; /* Smaller font for footer brand */
+                font-size: 1rem; /* Smaller font for footer brand */
             }
             .footer-grid p, .footer-grid li {
-                font-size: 0.85rem; /* Smaller font for footer text */
+                font-size: 0.75rem; /* Smaller font for footer text */
             }
             .footer-grid ul {
                 padding-left: 0; /* Remove default ul padding */
                 list-style: none; /* Remove list bullets */
             }
             .footer-grid ul li {
-                margin-bottom: 0.5rem; /* Space out list items */
+                margin-bottom: 0.4rem; /* Space out list items */
             }
             .footer-grid .flex.items-center {
                 justify-content: center; /* Center icons with text */
@@ -244,6 +248,24 @@
             .footer-grid .flex.items-center {
                 justify-content: flex-start; /* Align to start on desktop */
             }
+
+            /* Jadwal Misa alignment for Desktop */
+            .misa-entry {
+                display: flex; /* Use flexbox for each row */
+                justify-content: space-between; /* Space out day and time */
+                width: 100%; /* Ensure full width */
+                margin-bottom: 0.5rem; /* Jarak antar baris */
+            }
+            .misa-day {
+                text-align: left;
+                flex-basis: 50%; /* Beri ruang untuk teks hari */
+                font-size: 1rem; /* Ukuran font default */
+            }
+            .misa-time {
+                text-align: left; /* Jam di kanan */
+                flex-basis: 50%; /* Sisa ruang untuk jam */
+                font-size: 1rem; /* Ukuran font default */
+            }
         }
     </style>
 </head>
@@ -285,16 +307,19 @@
             <div class="bg-white p-6 rounded-xl shadow-lg card-hover-effect flex flex-col card-jadwal-misa">
                 <img src="{{ asset('images/jadwal_misa_card.jpg') }}" alt="Jadwal Misa" class="w-full h-48 object-cover rounded-t-lg mb-4">
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Jadwal Misa</h3>
-                <div class="misa-times flex justify-center items-start">
-                    <div>
-                        <h5>Senin-Jumat</h5>
-                        <h5>Sabtu</h5>
-                        <h5>Minggu</h5>
+                <div class="misa-times flex-grow">
+                    {{-- Setiap jadwal misa adalah satu baris flexbox --}}
+                    <div class="misa-entry">
+                        <h5 class="misa-day">Senin-Jumat</h5>
+                        <h5 class="misa-time">05 . 30</h5>
                     </div>
-                    <div>
-                        <h5>05 . 30</h5>
-                        <h5>18 . 00</h5>
-                        <h5>07 . 00</h5>
+                    <div class="misa-entry">
+                        <h5 class="misa-day">Sabtu</h5>
+                        <h5 class="misa-time">18 . 00</h5>
+                    </div>
+                    <div class="misa-entry">
+                        <h5 class="misa-day">Minggu</h5>
+                        <h5 class="misa-time">07 . 00</h5>
                     </div>
                 </div>
                 <a href="#" class="text-yellow-600 hover:text-yellow-800 font-semibold mt-auto">Klik Disini</a>
@@ -315,7 +340,7 @@
                 <img src="{{ asset('images/tentang_gereja_card.jpg') }}" alt="Tentang Gereja" class="w-full h-48 object-cover rounded-t-lg mb-4">
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Tentang Gereja</h3>
                 <p class="text-gray-700 mb-4 flex-grow">
-                    "Haruslah kamu pelihara hari Sabat, sebab itulah hari kudus bagimu." (Kel: 31:14). Jadwal misa mingguan Paroki Santo Yoseph beserta petugasnya.
+                    "Gereja Santo Yoseph yang bernama resmi Gereja Paroki Santo Yoseph, Sidareja adalah sebuah gereja paroki Katolik yang terletak di Kabupaten Cilacap, Jawa Tengah, Indonesia. Gereja ini didedikasikan kepada Santo Yoseph. Gereja ini berada di bawah naungan yurisdiksi Keuskupan Purwokerto.
                 </p>
                 <a href="#" class="text-yellow-600 hover:text-yellow-800 font-semibold mt-auto">Klik Disini</a>
             </div>

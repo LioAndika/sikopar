@@ -74,7 +74,7 @@
                 top: 0;
                 left: 0;
                 height: 100%;
-                width: 200px; /* DIKECILKAN: Lebar sidebar di mobile */
+                width: 200px; /* Lebar sidebar di mobile */
                 transform: translateX(-100%);
                 transition: transform 0.3s ease-in-out;
                 z-index: 21; /* Ensure sidebar is above header */
@@ -107,7 +107,7 @@
                 margin-right: 0.5rem;
             }
             .sidebar-container .text-xs.uppercase.text-gray-400 {
-                font-size: 0.65rem; /* Kecilkan font untuk "Admin Features" dll. */
+                font-size: 0.7rem; /* Disesuaikan: Kecilkan font untuk "Admin Features" dll. tapi tidak terlalu kecil */
                 padding-left: 1rem;
                 padding-right: 1rem;
                 margin-top: 0.75rem;
@@ -129,7 +129,7 @@
             }
             /* Adjusted padding for the body to ensure header content is visible */
             body {
-                padding-top: 3.5rem; /* DIKECILKAN: Sesuaikan padding-top untuk memberi ruang pada header yang lebih kecil */
+                padding-top: 3.5rem; /* Sesuaikan padding-top untuk memberi ruang pada header yang lebih kecil */
             }
             header {
                 position: fixed;
@@ -138,7 +138,7 @@
                 width: 100%;
                 z-index: 10; /* Ensure header is above main content */
                 background-color: white; /* Ensure header has a background */
-                padding: 0.4rem 0.8rem; /* DIKECILKAN: Adjusted header padding for mobile to be smaller */
+                padding: 0.5rem 1rem; /* Disesuaikan: Adjusted header padding for mobile to be smaller but not too small */
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -146,7 +146,7 @@
                 margin-bottom: 1rem; /* Memberi jarak bawah header di mobile */
             }
             header h1 {
-                font-size: 0.8rem; /* DIKECILKAN: Further reduced font size for mobile header */
+                font-size: 1rem; /* Disesuaikan: Reduced font size for mobile header to be more readable */
                 font-weight: bold;
                 color: #374151; /* Match general text color */
             }
@@ -157,15 +157,15 @@
                 justify-content: center;
             }
             .mobile-avatar {
-                width: 2.0rem; /* Size of the circular avatar */
-                height: 2.0rem;
+                width: 2.2rem; /* Disesuaikan: Size of the circular avatar, slightly larger */
+                height: 2.2rem; /* Disesuaikan: Size of the circular avatar, slightly larger */
                 background-color: #3B82F6; /* Blue background */
                 color: white; /* White text for initials */
                 border-radius: 50%; /* Make it circular */
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 0.5rem; /* Font size for initials */
+                font-size: 0.7rem; /* Disesuaikan: Font size for initials, more readable */
                 font-weight: bold;
                 text-transform: uppercase; /* Ensure initials are uppercase */
             }
@@ -178,41 +178,59 @@
             /* Ensure the main content doesn't have an additional top padding on mobile */
             .main-content {
                 padding-top: 0;
-                padding-left: 0.75rem; /* DIKECILKAN: Tambahkan sedikit padding kiri dan kanan */
-                padding-right: 0.75rem; /* DIKECILKAN: Tambahkan sedikit padding kiri dan kanan */
+                padding-left: 1rem; /* Disesuaikan: Tambahkan sedikit padding kiri dan kanan */
+                padding-right: 1rem; /* Disesuaikan: Tambahkan sedikit padding kiri dan kanan */
+                padding-bottom: 1rem; /* Tambahkan padding bawah agar tidak terlalu mepet footer */
             }
 
-
+            /* --- Penyesuaian Ukuran Teks Konten Utama di Mobile --- */
+            .bg-white.p-8.rounded-xl.shadow-lg.col-span-full.mb-8.mt-3.card-hover-effect {
+                padding: 1.5rem; /* Disesuaikan: Padding card pengumuman lebih proporsional */
+                margin-top: 1rem; /* Disesuaikan: Kurangi margin top */
+                margin-bottom: 1.5rem; /* Disesuaikan: Kurangi margin bottom */
+            }
             .bg-white.p-8.rounded-xl.shadow-lg.col-span-full.mb-8.mt-3.card-hover-effect h1 {
-                font-size: 0.7rem; /* Judul papan pengumuman lebih kecil */
+                font-size: 1rem; /* Disesuaikan: Judul papan pengumuman lebih besar */
+                margin-bottom: 0.75rem; /* Disesuaikan: Jarak bawah judul */
+                padding-bottom: 0.75rem; /* Disesuaikan: Padding bawah border judul */
             }
             .bg-white.p-8.rounded-xl.shadow-lg.col-span-full.mb-8.mt-3.card-hover-effect h1 svg {
-                width: 1.5rem; /* Ikon lebih kecil */
-                height: 1.5rem;
-                margin-right: 0.4rem; /* Jarak ikon ke teks lebih kecil */
+                width: 1.75rem; /* Disesuaikan: Ikon lebih besar */
+                height: 1.75rem;
+                margin-right: 0.5rem; /* Disesuaikan: Jarak ikon ke teks */
             }
             .prose p.whitespace-pre-line.leading-relaxed {
-                font-size: 0.6rem; /* Konten pengumuman lebih kecil */
+                font-size: 0.85rem; /* Disesuaikan: Konten pengumuman lebih besar */
+                line-height: 1.5; /* Sesuaikan line-height untuk keterbacaan */
             }
             .prose p.text-sm.text-gray-500.mt-3.italic {
-                font-size: 0.6rem; /* Info pembuat lebih kecil */
+                font-size: 0.75rem; /* Disesuaikan: Info pembuat lebih besar */
+                margin-top: 1rem; /* Disesuaikan: Jarak atas info pembuat */
             }
             .prose p.text-gray-500:not([class*="text-sm"]) {
-                font-size: 0.6rem; /* Teks "belum ada pengumuman" lebih kecil */
+                font-size: 0.85rem; /* Disesuaikan: Teks "belum ada pengumuman" lebih besar */
             }
 
+            /* --- Penyesuaian Kartu Total User / Total Stasi di Mobile --- */
+            .grid {
+                gap: 1rem; /* Disesuaikan: Jarak antar grid item */
+            }
             .grid h3 {
-                font-size: 0.7rem; /* Judul sedikit lebih kecil di mobile */
+                font-size: 1.1rem; /* Disesuaikan: Judul kartu lebih besar */
+                margin-bottom: 0.5rem; /* Disesuaikan: Jarak bawah judul */
             }
             .grid p.text-sm.text-gray-600 {
-                font-size: 0.6rem; /* Deskripsi lebih kecil di mobile */
+                font-size: 0.75rem; /* Disesuaikan: Deskripsi lebih besar */
+                margin-bottom: 0.5rem; /* Disesuaikan: Jarak bawah deskripsi */
             }
             .grid p.text-3xl.font-bold {
-                font-size: 1rem; /* Angka jumlah lebih kecil di mobile */
+                font-size: 2rem; /* Disesuaikan: Angka jumlah lebih besar */
+                margin-top: 0.75rem; /* Disesuaikan: Jarak atas angka */
             }
             .grid a.mt-4 {
-                padding: 0.4rem 1rem; /* Tombol lebih kecil di mobile */
-                font-size: 0.6rem; /* Teks tombol lebih kecil di mobile */
+                padding: 0.6rem 1.2rem; /* Disesuaikan: Tombol lebih besar */
+                font-size: 0.85rem; /* Disesuaikan: Teks tombol lebih besar */
+                margin-top: 1rem !important; /* Pastikan margin-top tombol tetap berlaku */
             }
         }
 
@@ -304,18 +322,18 @@
 
         @media (max-width: 767px) {
             .chart-container {
-                padding: 1rem;
-                margin-top: 20px;
-                margin-bottom: 20px;
+                padding: 1.5rem; /* Disesuaikan: Padding lebih besar */
+                margin-top: 1.5rem; /* Disesuaikan: Margin lebih besar */
+                margin-bottom: 1.5rem; /* Disesuaikan: Margin lebih besar */
             }
             .chart-container h2 {
-                font-size: 1.25rem;
+                font-size: 1.1rem; /* Disesuaikan: Judul chart lebih besar */
                 margin-bottom: 1rem;
-                padding-bottom: 0.5rem;
+                padding-bottom: 0.75rem; /* Disesuaikan: Padding bawah judul */
             }
             /* Pada mobile, sesuaikan tinggi kanvas jika perlu */
             .chart-container canvas {
-                height: 300px !important; /* Tinggi lebih kecil untuk mobile */
+                height: 280px !important; /* Disesuaikan: Tinggi lebih besar untuk mobile */
             }
         }
     </style>
@@ -392,7 +410,7 @@
                 <h1 class="text-4xl font-extrabold text-gray-800">Dashboard Super Admin</h1>
             </div>
             <div class="desktop-welcome flex items-center space-x-4">
-                <span class="text-gray-700 text-lg">Selamat datang, <span class="font-bold text-blue-700">{{ Auth::user()->name }}!</span></span>
+                <span class="text-gray-700 text-lg">Selamat datang, <span class="font-bold text-blue-700">{{ Auth::user()->name ?? 'Pengguna' }}!</span></span>
                 <div class="desktop-avatar">
                     @php
                         $name = Auth::user()->name ?? 'Guest User';

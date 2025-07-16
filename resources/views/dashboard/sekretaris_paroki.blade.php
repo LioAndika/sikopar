@@ -100,8 +100,8 @@
             
             /* Optional: Perkecil font SIKOPAR di mobile sidebar */
             .sidebar-item {
-                font-size: 0.85rem; /* DIKECILKAN: Ukuran font item sidebar */
-                padding: 0.6rem 1rem; /* DIKECILKAN: Padding item sidebar */
+                font-size: 0.9rem; /* Diperbesar sedikit: Ukuran font item sidebar */
+                padding: 0.7rem 1.2rem; /* Diperbesar sedikit: Padding item sidebar */
             }
 
             /* Ukuran logo dan teks SIKOPAR di HP */
@@ -135,7 +135,7 @@
                 margin-bottom: 1rem; /* Memberi jarak bawah header di mobile */
             }
             header h1 {
-                font-size: 0.8rem; /* Further reduced font size for mobile header */
+                font-size: 0.7rem; /* Further reduced font size for mobile header */
                 font-weight: bold;
                 color: #374151; /* Match general text color */
             }
@@ -144,10 +144,19 @@
                 display: flex; /* Show on mobile, use flex for centering */
                 align-items: center;
                 justify-content: center;
-                font-size: 0.75rem; /* Ukuran teks "Selamat datang" di mobile */
             }
-            .mobile-welcome span {
-                font-size: 0.75rem; /* Ensure the span inside also adjusts */
+            .mobile-avatar {
+                width: 1.8rem; /* DIKECILKAN: Size of the circular avatar */
+                height: 1.8rem; /* DIKECILKAN: Size of the circular avatar */
+                background-color: #3B82F6; /* Blue background */
+                color: white; /* White text for initials */
+                border-radius: 50%; /* Make it circular */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.6rem; /* DIKECILKAN: Font size for initials */
+                font-weight: bold;
+                text-transform: uppercase; /* Ensure initials are uppercase */
             }
             header .desktop-welcome {
                 display: none; /* Hide desktop welcome on mobile */
@@ -166,64 +175,97 @@
 
             /* Ukuran teks untuk judul h2 di dalam kartu "Pengumuman Aktif" */
             .bg-white.p-8.rounded-xl.shadow-lg h2 {
-                font-size: 1rem; /* Mengurangi ukuran judul di mobile */
+                font-size: 1.1rem; /* Disesuaikan, sedikit lebih besar */
+                margin-bottom: 0.75rem; /* Menambahkan margin bawah */
             }
             .bg-white.p-8.rounded-xl.shadow-lg h2 svg {
-                width: 1rem; /* Sesuaikan ukuran ikon */
-                height: 1.5rem;
+                width: 1.25rem; /* Disesuaikan ukuran ikon */
+                height: 1.25rem; /* Disesuaikan ukuran ikon */
                 margin-right: 0.5rem;
             }
 
             /* Ukuran teks untuk judul h3 di Pengumuman Aktif */
             .bg-white.p-8.rounded-xl.shadow-lg h3 {
-                font-size: 0.8rem; /* Ukuran judul pengumuman */
+                font-size: 0.95rem; /* Disesuaikan, sedikit lebih besar */
+                margin-bottom: 0.5rem; /* Menambahkan margin bawah */
             }
 
             /* Ukuran teks untuk paragraf konten di Pengumuman Aktif dan Ringkasan */
             .bg-white.p-8.rounded-xl.shadow-lg p {
-                font-size: 0.7rem; /* Lebih kecil untuk konten di mobile */
-                line-height: 1.5;
+                font-size: 0.85rem; /* Disesuaikan, lebih mudah dibaca */
+                line-height: 1.6; /* Tingkatkan line-height untuk keterbacaan */
+                margin-bottom: 0.75rem; /* Menambahkan margin bawah */
             }
 
             /* Ukuran teks untuk informasi 'Terakhir diperbarui:' di pengumuman */
             .bg-white.p-8.rounded-xl.shadow-lg .text-sm.text-gray-500 {
-                font-size: 0.6rem; /* Lebih kecil lagi untuk informasi tambahan di mobile */
+                font-size: 0.75rem; /* Disesuaikan, lebih mudah dibaca */
+                margin-top: 0.5rem; /* Memberi sedikit jarak dari konten utama */
             }
 
             /* Ukuran teks untuk tombol "Lihat Laporan Kolekte Final" */
             .bg-white.p-8.rounded-xl.shadow-lg a.inline-flex {
-                font-size: 0.7rem; /* Ukuran tombol di mobile */
-                padding: 0.6rem 1rem; /* Padding tombol di mobile */
+                font-size: 0.85rem; /* Disesuaikan, lebih mudah dibaca */
+                padding: 0.75rem 1.25rem; /* Padding tombol di mobile */
             }
             .bg-white.p-8.rounded-xl.shadow-lg a.inline-flex svg {
-                width: 1rem;
-                height: 1rem;
-                margin-right: 0.4rem;
+                width: 1.1rem; /* Disesuaikan ukuran ikon */
+                height: 1.1rem; /* Disesuaikan ukuran ikon */
+                margin-right: 0.5rem;
             }
 
             /* Ukuran teks untuk label form */
             form label {
-                font-size: 0.6rem;
+                font-size: 0.8rem; /* Disesuaikan, lebih mudah dibaca */
+                margin-bottom: 0.3rem; /* Mengurangi jarak ke input */
             }
             /* Ukuran teks untuk input form */
             form input, form textarea {
-                font-size: 0.75rem;
-                padding: 0.4rem 0.6rem;
+                font-size: 0.9rem; /* Disesuaikan, lebih mudah dibaca */
+                padding: 0.6rem 0.8rem; /* Padding input */
             }
             /* Ukuran teks untuk tombol simpan pengumuman */
             form button[type="submit"] {
-                font-size: 0.65rem;
-                padding: 0.6rem 1rem;
+                font-size: 0.85rem; /* Disesuaikan, lebih mudah dibaca */
+                padding: 0.75rem 1.25rem; /* Padding tombol */
             }
             form button[type="submit"] svg {
-                width: 1rem;
-                height: 1rem;
-                margin-right: 0.4rem;
+                width: 1.1rem; /* Disesuaikan ukuran ikon */
+                height: 1.1rem; /* Disesuaikan ukuran ikon */
+                margin-right: 0.5rem;
             }
 
             /* Adjust card padding for mobile to be less spacious */
             .bg-white.p-8.rounded-xl {
-                padding: 1.5rem; /* Reduced padding for cards on mobile */
+                padding: 1.25rem; /* Disesuaikan, sedikit lebih kecil dari 1.5rem untuk kerapian */
+                margin-bottom: 1rem; /* Konsistenkan jarak antar kartu */
+            }
+            .grid {
+                gap: 1rem; /* Mengurangi jarak antar card di mobile */
+            }
+            .mt-6 {
+                margin-top: 1.5rem; /* Menyesuaikan jarak atas dari header ke card pertama */
+            }
+
+            /* Override header h1 for smaller screens */
+            header h1 {
+                font-size: 1rem; /* Ukuran font yang lebih besar untuk judul header di mobile */
+                white-space: nowrap; /* Mencegah judul pecah baris */
+                overflow: hidden;
+                text-overflow: ellipsis; /* Menambahkan ellipsis jika terlalu panjang */
+            }
+
+            /* Override mobile-welcome for more prominence */
+            .mobile-welcome {
+                display: flex; /* Memastikan tampil */
+                font-size: 0.85rem; /* Ukuran font yang lebih besar */
+                text-align: right;
+                margin-left: auto; /* Dorong ke kanan */
+            }
+            .mobile-avatar {
+                width: 2rem; /* Ukuran avatar lebih besar */
+                height: 2rem;
+                font-size: 0.7rem; /* Font avatar lebih besar */
             }
             /* --- END: KODE BARU UNTUK UKURAN TEKS KARTU KHUSUS MOBILE --- */
         }
@@ -373,7 +415,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
-                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800">Dashboard Sekretaris Paroki</h1>
+                <h1 class="text-xl md:text-4xl font-extrabold text-gray-800">Dashboard Sekretaris Paroki</h1>
             </div>
             <div class="desktop-welcome flex items-center space-x-4">
                 <span class="text-gray-700 text-lg">Selamat datang, <span class="font-bold text-blue-700">{{ Auth::user()->name }}!</span></span>
@@ -393,9 +435,23 @@
                     {{ $initials }}
                 </div>
             </div>
-            <div class="mobile-welcome md:hidden">
-                <span class="text-gray-700">Selamat datang, <span class="font-bold text-blue-700">{{ Auth::user()->name }}!</span></span>
-            </div>
+                <div class="mobile-welcome md:hidden">
+                        <div class="mobile-avatar">
+                            @php
+                                $name = Auth::user()->name ?? 'Guest User';
+                                $words = explode(' ', $name);
+                                $initials = '';
+                                if (count($words) == 1 && strlen($words[0]) >= 2) {
+                                    $initials = strtoupper(substr($words[0], 0, 2));
+                                } elseif (count($words) > 1) {
+                                    $initials = strtoupper(substr($words[0], 0, 1) . substr($words[1], 0, 1));
+                                } else {
+                                    $initials = 'GU'; // Default for "Guest User" or empty
+                                }
+                            @endphp
+                            {{ $initials }}
+                        </div>
+                </div>
         </header>
 
         {{-- Success/Error Messages --}}

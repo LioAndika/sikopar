@@ -343,7 +343,7 @@
                 margin-bottom: 1rem; /* Memberi jarak bawah header di mobile */
             }
             header h1 {
-                font-size: 0.8rem; /* DIKECILKAN: Further reduced font size for mobile header */
+                font-size: 1rem; /* DIKECILKAN: Further reduced font size for mobile header */
                 font-weight: bold;
                 color: #374151; /* Match general text color */
             }
