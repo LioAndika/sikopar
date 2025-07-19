@@ -294,7 +294,6 @@
                 </button>
                 <h1 class="text-4xl font-extrabold text-gray-800">Laporan Kolekte Menunggu Validasi Romo Paroki</h1>
             </div>
-           
         </header>
 
         {{-- Mengubah kelas untuk div pembungkus tabel --}}
