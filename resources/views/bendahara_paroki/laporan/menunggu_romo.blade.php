@@ -294,12 +294,7 @@
                 </button>
                 <h1 class="text-4xl font-extrabold text-gray-800">Laporan Kolekte Menunggu Validasi Romo Paroki</h1>
             </div>
-            <div class="desktop-welcome flex items-center space-x-4">
-                <span class="text-gray-700 text-lg">Selamat datang, <span class="font-bold text-blue-700">{{ Auth::user()->name }}!</span></span>
-            </div>
-            <div class="mobile-welcome md:hidden">
-                <span class="text-gray-700 text-sm">Selamat datang, <span class="font-bold text-blue-700">{{ Auth::user()->name }}!</span></span>
-            </div>
+           
         </header>
 
         {{-- Mengubah kelas untuk div pembungkus tabel --}}
