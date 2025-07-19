@@ -246,6 +246,20 @@
             header .mobile-welcome {
                 display: none !important; /* Hide mobile welcome on desktop */
             }
+            .desktop-avatar {
+                width: 2.2rem; /* DIKECILKAN: Ukuran avatar desktop */
+                height: 2.2rem;
+                background-color: #3B82F6; /* Blue background */
+                color: white; /* White text for initials */
+                border-radius: 50%; /* Make it circular */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.7rem; /* DIKECILKAN: Font size for initials */
+                font-weight: bold;
+                text-transform: uppercase; /* Ensure initials are uppercase */
+                margin-left: 0.75rem; /* Space between text and avatar */
+            }
             /* Reset margin-top for the first content div on desktop */
             .main-content > div:first-of-type {
                 margin-top: 0 !important;
