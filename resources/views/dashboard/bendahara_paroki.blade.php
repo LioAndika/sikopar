@@ -223,17 +223,19 @@
                 /* PENGECILAN FONT HEADER DI DESKTOP (sudah dilakukan sebelumnya) */
                 font-size: 1.75rem !important;
             }
+            header .desktop-welcome {
+                display: flex !important; /* Show desktop welcome on desktop */
+                font-size: 0.9rem; /* DIKECILKAN: Font size teks selamat datang */
+            }
+            header .desktop-avatar {
+                width: 2.2rem; /* DIKECILKAN: Ukuran avatar desktop */
+                height: 2.2rem; /* DIKECILKAN: Ukuran avatar desktop */
+                font-size: 0.7rem; /* DIKECILKAN: Font size inisial avatar */
+            }
             header .mobile-welcome {
                 display: none !important; /* Hide mobile welcome on desktop */
             }
-            header .desktop-welcome {
-                display: none !important; /* Show desktop welcome on desktop */
-                align-items: center; /* Vertically align items in desktop welcome */
-            }
-            header .desktop-welcome span {
-                font-size: 0.95rem; /* Slightly smaller welcome text for desktop */
-            }
-        }
+        
             /* Styling for desktop avatar - if you want a separate avatar on desktop too */
             .desktop-avatar {
                 width: 2.8rem; /* Size of the circular avatar */
