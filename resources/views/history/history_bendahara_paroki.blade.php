@@ -677,7 +677,7 @@
                         <div class="digital-signature-box" style="border: 1px solid #ccc; width: 150px; height: 70px; margin: 10px auto; display: flex; align-items: center; justify-content: center; font-size: 0.8em; color: #777;">
                             Tanda Tangan Digital
                         </div>
-                        <div class="name">Fransiska Unawati</div>
+                        <div class="name">Fransiska Linawati</div>
                     </div>
                 </div>
                 <div class="printed-by" style="display: none;">Printed by: {{ Auth::user()->name ?? 'N/A' }}</div>
