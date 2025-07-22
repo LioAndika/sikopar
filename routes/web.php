@@ -11,7 +11,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StasiController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SekretarisParokiController;
-use Illuminate\Http\Request; // PASTIKAN INI ADA DI BAGIAN ATAS FILE ANDA
+use Illuminate\Http\Request;
+use App\Http\Controllers\PageController; // <--- PASTIKAN INI ADA DAN TIDAK DUPLIKAT
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,8 @@ Route::get('/', function () {
     if (Auth::check()) {
         return (new AuthController())->redirectToDashboard(Auth::user());
     }
-    return view('landing');
-})->name('landing');
+    return view('landing'); // Ini adalah landing page Anda saat ini
+})->name('landing'); // Tetap gunakan 'landing' sebagai nama untuk halaman utama publik Anda
 
 // Rute Otentikasi
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -86,15 +87,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/laporan-kolekte/status', [LaporanKolekteController::class, 'indexBendahara'])->name('laporan.status.bendahara');
     });
 
-  
-  // Grup Ketua Stasi
-Route::middleware('role.or.superadmin:ketua-stasi')->group(function () {
-    Route::prefix('ketua-stasi')->name('ketua-stasi.')->group(function () {
-        Route::get('/laporan-validasi', [KetuaStasiController::class, 'index'])->name('laporan.index');
-        // PERUBAHAN DI SINI
-        Route::post('/laporan/{laporanKolekte}/validasi', [KetuaStasiController::class, 'validateLaporan'])->name('laporan.validate'); // Ubah 'validasi' menjadi 'validate'
-        Route::post('/laporan/{laporanKolekte}/tolak', [KetuaStasiController::class, 'rejectLaporan'])->name('laporan.reject');     // Ubah 'tolak' menjadi 'reject'
-    });
+    // Grup Ketua Stasi
+    Route::middleware('role.or.superadmin:ketua-stasi')->group(function () {
+        Route::prefix('ketua-stasi')->name('ketua-stasi.')->group(function () {
+            Route::get('/laporan-validasi', [KetuaStasiController::class, 'index'])->name('laporan.index');
+            Route::post('/laporan/{laporanKolekte}/validasi', [KetuaStasiController::class, 'validateLaporan'])->name('laporan.validate');
+            Route::post('/laporan/{laporanKolekte}/tolak', [KetuaStasiController::class, 'rejectLaporan'])->name('laporan.reject');
+        });
     });
 
     // Grup Bendahara Paroki
@@ -133,3 +132,13 @@ Route::middleware('role.or.superadmin:ketua-stasi')->group(function () {
     // Rute Global untuk Pengumuman (jika ada, biarkan di sini)
     // Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman.index');
 });
+
+// --- Rute Halaman Publik (yang akan diakses dari navbar) ---
+// Pastikan rute ini DILUAR dari grup middleware 'auth' agar bisa diakses tanpa login.
+Route::get('/profil-gereja', [PageController::class, 'profilGereja'])->name('profil-gereja');
+Route::get('/kegiatan-agenda', [PageController::class, 'kegiatanAgenda'])->name('kegiatan-agenda');
+Route::get('/galeri', [PageController::class, 'galeri'])->name('galeri');
+Route::get('/informasi', [PageController::class, 'informasi'])->name('informasi');
+// Jika Anda ingin "Tentang Gereja" di footer mengarah ke halaman yang berbeda dari "Profil Gereja",
+// Anda bisa menambahkan rute terpisah di sini:
+// Route::get('/tentang-gereja', [PageController::class, 'tentangGereja'])->name('tentang-gereja');
