@@ -379,7 +379,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
-                <h1 class="text-4xl font-extrabold text-gray-800">Dashboard Bendahara Stasi</h1>
+                <h1 class="text-4xl font-extrabold text-gray-800">Dashboard Bendahara Stasi Lingkungan</h1>
             </div>
             <div class="desktop-welcome flex items-center space-x-4">
                 <span class="text-gray-700 text-lg">Selamat datang, <span class="font-bold text-blue-700">{{ Auth::user()->name }}!</span></span>

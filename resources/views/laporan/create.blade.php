@@ -232,7 +232,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
-                <h1 class="text-xl md:text-3xl font-extrabold text-gray-800">Tambah Laporan Kolekte Stasi</h1> </div>
+                <h1 class="text-xl md:text-3xl font-extrabold text-gray-800">Tambah Laporan Kolekte</h1> </div>
             {{-- <div class="hidden md:flex items-center space-x-2">
                 <span class="text-gray-700 font-medium">Halo, {{ Auth::user()->name }}!</span>
                 <img src="{{ asset('images/user-avatar.png') }}" alt="User Avatar" class="w-8 h-8 rounded-full">
