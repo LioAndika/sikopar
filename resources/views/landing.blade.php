@@ -457,12 +457,12 @@
                     <p class="text-gray-700">Bertempat di Gereja Paroki Santo Yoseph Sidareja. Mari hadir dalam Ekaristi khusus ini.</p>
                 </div>
 
-                {{-- Agenda 2: Pertemuan Lingkungan St. Petrus --}}
+                {{-- Agenda 2: Pertemuan Pendalaman Iman Lingkungan St. Agustinus --}}
                 <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500 card-hover-effect">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Pertemuan Lingkungan St. Petrus</h3>
-                    <p class="text-gray-600 mb-1">Tanggal: 12 Juli 2025</p>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Pertemuan Pendalaman Iman Lingkungan St. Petrus</h3>
+                    <p class="text-gray-600 mb-1">Tanggal: 23 Juli 2025</p>
                     <p class="text-gray-600 mb-3">Waktu: 19.00 WIB</p>
-                    <p class="text-gray-700">Agenda: Pembahasan persiapan Peringatan HUT Paroki. Lokasi akan diumumkan lebih lanjut oleh Ketua Lingkungan.</p>
+                    <p class="text-gray-700">Agenda: Pendalaman iman rutin mingguan setiap hari rabu dan Sosialisasi Website terbaru Paroki Santo Yoseph Sidareja</p>
                 </div>
 
                 {{-- Agenda 3: Rekoleksi OMK Paroki --}}
@@ -513,8 +513,8 @@
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover-effect">
                     <img src="{{ asset('images/pelantikan.jpg') }}" alt="Pelantikan Misdinar" class="w-full h-56 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-900">Pelantikan Misdinar</h3>
-                        <p class="text-gray-600 text-sm mt-1">Upacara pelantikan misdinar baru di gereja.</p>
+                        <h3 class="text-lg font-semibold text-gray-900">Pelantikan Pastor Paroki</h3>
+                        <p class="text-gray-600 text-sm mt-1">Upacara pelantikan Pastor Kepala Paroki Romo Andreas Surya Purnawan</p>
                     </div>
                 </div>
 
