@@ -308,7 +308,7 @@
                 Tambah Laporan Kolekte
             </a>
             <a href="{{ route('laporan.status.bendahara') }}" class="sidebar-item {{ Request::routeIs('laporan.status.bendahara') ? 'active' : '' }}">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
                 Status Validasi Laporan
             </a>
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();" class="sidebar-item hover:bg-red-700 mt-4">
@@ -329,16 +329,19 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
-                <h1 class="text-xl md:text-3xl font-extrabold text-gray-800">Status Laporan Kolekte  {{ $namaStasi }}</h1>
+                <h1 class="text-xl md:text-3xl font-extrabold text-gray-800">Status Laporan Kolekte {{ $namaStasi }}</h1>
             </div>
         </header>
 
+        {{-- Notifikasi Sukses --}}
         @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-3 py-2.5 rounded-lg relative mb-4 md:mb-6 shadow-md text-sm md:text-base" role="alert">
+            <div id="success-alert" class="bg-green-100 border border-green-400 text-green-700 px-3 py-2.5 rounded-lg relative mb-4 md:mb-6 shadow-md text-sm md:text-base" role="alert">
                 <strong class="font-bold">Berhasil!</strong>
                 <span class="block sm:inline">{{ session('success') }}</span>
             </div>
         @endif
+
+        {{-- Notifikasi Error --}}
         @if (session('error'))
             <div class="bg-red-100 border border-red-400 text-red-700 px-3 py-2.5 rounded-lg relative mb-4 md:mb-6 shadow-md text-sm md:text-base" role="alert">
                 <strong class="font-bold">Error!</strong>
@@ -409,6 +412,20 @@
                 sidebar.classList.remove('active');
                 overlay.classList.remove('active');
                 document.body.classList.remove('overflow-hidden');
+            }
+        });
+
+        // JavaScript untuk menghilangkan notifikasi sukses setelah 5 detik
+        document.addEventListener('DOMContentLoaded', function() {
+            const successAlert = document.getElementById('success-alert');
+            if (successAlert) {
+                setTimeout(function() {
+                    successAlert.style.transition = 'opacity 0.5s ease-out';
+                    successAlert.style.opacity = '0';
+                    setTimeout(function() {
+                        successAlert.remove(); // Hapus elemen dari DOM setelah transisi
+                    }, 500); // Sesuaikan dengan durasi transisi
+                }, 5000); // 5000 milidetik = 5 detik
             }
         });
     </script>

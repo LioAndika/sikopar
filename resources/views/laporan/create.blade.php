@@ -138,7 +138,7 @@
                 text-transform: uppercase; /* Ensure initials are uppercase */
             }
             header .desktop-welcome {
-                display: none; /* Hide desktop welcome on mobile */
+                display: none; /* Hide desktop welcome on desktop */
             }
             #burger-btn {
                 z-index: 22; /* Ensure burger button is clickable above sidebar */
@@ -227,7 +227,7 @@
     </div>
 
     <div class="flex-grow p-4 md:p-10 main-content">
-         <header class="bg-white rounded-xl shadow-lg flex items-center justify-between mb-6 md:mb-8 p-3 md:p-4"> <div class="flex items-center">
+        <header class="bg-white rounded-xl shadow-lg flex items-center justify-between mb-6 md:mb-8 p-3 md:p-4"> <div class="flex items-center">
                 <button id="burger-btn" class="md:hidden mr-3 p-1.5 focus:outline-none focus:bg-gray-200 rounded-md" onclick="toggleSidebar()"> <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -252,18 +252,18 @@
 
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-md max-w-xl md:max-w-2xl mx-auto card-hover-effect"> <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-4 md:mb-6 border-b pb-2 md:pb-3 border-gray-200">Form Laporan Kolekte</h2> <form action="{{ route('laporan.store') }}" method="POST">
                 @csrf
-                <div class="mb-4 md:mb-5"> <label for="tanggal_kolekte" class="block text-gray-700 text-sm md:text-base font-bold mb-1.5 md:mb-2">Tanggal Kolekte <span class="text-red-500">*</span></label> <input type="date" id="tanggal_kolekte" name="tanggal_kolekte" value="{{ old('tanggal_kolekte') }}" required
-                           class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-800 text-sm md:text-base leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200
-                                 @error('tanggal_kolekte') border-red-500 ring-red-500 @enderror"> @error('tanggal_kolekte')
+                <div class="mb-4 md:mb-5"> <label for="tanggal_kolekte" class="block text-gray-700 text-sm md:text-base font-bold mb-1.5 md:mb-2">Tanggal Kolekte <span class="text-red-500">*</span></label> <input type="date" id="tanggal_kolekte" name="tanggal_kolekte" value="{{ old('tanggal_kolekte') }}"
+                                class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-800 text-sm md:text-base leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200
+                                    @error('tanggal_kolekte') border-red-500 ring-red-500 @enderror"> @error('tanggal_kolekte')
                         <p class="text-red-500 text-xs italic mt-1.5">{{ $message }}</p> @enderror
                 </div>
 
                 <div class="mb-4 md:mb-5"> <label for="nama_pengirim" class="block text-gray-700 text-sm md:text-base font-bold mb-1.5 md:mb-2">Nama Pengirim (Bendahara Stasi)</label> <input type="text" id="nama_pengirim" name="nama_pengirim" value="{{ Auth::user()->name }}" readonly
-                           class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 bg-gray-100 cursor-not-allowed text-sm md:text-base leading-tight"> <p class="text-xs text-gray-500 mt-1">Nama ini otomatis diambil dari akun Anda yang sedang login.</p> </div>
+                                class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 bg-gray-100 cursor-not-allowed text-sm md:text-base leading-tight"> <p class="text-xs text-gray-500 mt-1">Nama ini otomatis diambil dari akun Anda yang sedang login.</p> </div>
 
-                <div class="mb-4 md:mb-5"> <label for="stasi_id" class="block text-gray-700 text-sm md:text-base font-bold mb-1.5 md:mb-2">Asal Stasi <span class="text-red-500">*</span></label> <select id="stasi_id" name="stasi_id" required
-                             class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-800 text-sm md:text-base leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200
-                                     @error('stasi_id') border-red-500 ring-red-500 @enderror"> <option value="">Pilih Stasi</option>
+                <div class="mb-4 md:mb-5"> <label for="stasi_id" class="block text-gray-700 text-sm md:text-base font-bold mb-1.5 md:mb-2">Asal Stasi <span class="text-red-500">*</span></label> <select id="stasi_id" name="stasi_id"
+                                     class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-800 text-sm md:text-base leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200
+                                            @error('stasi_id') border-red-500 ring-red-500 @enderror"> <option value="">Pilih Stasi</option>
                         @foreach ($stasi as $s)
                             <option value="{{ $s->id }}" {{ old('stasi_id') == $s->id ? 'selected' : '' }}>{{ $s->nama }}</option>
                         @endforeach
@@ -272,15 +272,15 @@
                         <p class="text-red-500 text-xs italic mt-1.5">{{ $message }}</p> @enderror
                 </div>
 
-                <div class="mb-5 md:mb-6"> <label for="jumlah_kolekte" class="block text-gray-700 text-sm md:text-base font-bold mb-1.5 md:mb-2">Jumlah Kolekte (Rp) <span class="text-red-500">*</span></label> <input type="number" id="jumlah_kolekte" name="jumlah_kolekte" value="{{ old('jumlah_kolekte') }}" step="0.01" min="0" required
-                           class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-800 text-sm md:text-base leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200
-                                 @error('jumlah_kolekte') border-red-500 ring-red-500 @enderror"> @error('jumlah_kolekte')
+                <div class="mb-5 md:mb-6"> <label for="jumlah_kolekte" class="block text-gray-700 text-sm md:text-base font-bold mb-1.5 md:mb-2">Jumlah Kolekte (Rp) <span class="text-red-500">*</span></label> <input type="number" id="jumlah_kolekte" name="jumlah_kolekte" value="{{ old('jumlah_kolekte') }}" step="0.01" min="0"
+                                class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-800 text-sm md:text-base leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200
+                                    @error('jumlah_kolekte') border-red-500 ring-red-500 @enderror"> @error('jumlah_kolekte')
                         <p class="text-red-500 text-xs italic mt-1.5">{{ $message }}</p> @enderror
                 </div>
 
                 <div class="flex items-center justify-center">
                     <button type="submit"
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105 w-full md:w-auto text-base md:text-lg"> <svg class="w-4 h-4 md:w-5 md:h-5 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105 w-full md:w-auto text-base md:text-lg"> <svg class="w-4 h-4 md:w-5 md:h-5 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                         Simpan Laporan
                     </button>
                 </div>

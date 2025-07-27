@@ -37,10 +37,23 @@ class LaporanKolekteController extends Controller
      */
     public function store(Request $request)
     {
+         // Validasi input untuk pembuatan laporan baru
         $validatedData = $request->validate([
             'tanggal_kolekte' => 'required|date',
             'stasi_id' => 'required|exists:stasi,id',
-            'jumlah_kolekte' => 'required|numeric|min:0',
+            // Aturan validasi untuk jumlah_kolekte (hanya angka tanpa titik/koma)
+            'jumlah_kolekte' => ['required', 'numeric', 'min:0', 'regex:/^\d+$/'],
+        ],
+        // Semua pesan kustom langsung didefinisikan di sini sebagai argumen kedua
+        [
+            'tanggal_kolekte.required' => 'Tanggal kolekte wajib diisi.',
+            'tanggal_kolekte.date' => 'Format tanggal kolekte tidak valid.',
+            'stasi_id.required' => 'Asal stasi wajib dipilih.',
+            'stasi_id.exists' => 'Asal stasi tidak valid.',
+            'jumlah_kolekte.required' => 'Jumlah kolekte wajib diisi.',
+            'jumlah_kolekte.numeric' => 'Jumlah kolekte harus berupa angka.',
+            'jumlah_kolekte.min' => 'Jumlah kolekte tidak boleh kurang dari 0.',
+            'jumlah_kolekte.regex' => 'Format jumlah kolekte salah. Harap masukkan angka tanpa titik atau koma (misal: 100000).',
         ]);
 
         $namaPengirim = Auth::user()->name;
@@ -60,7 +73,7 @@ class LaporanKolekteController extends Controller
             'catatan_revisi_romo_paroki' => null,
         ]);
 
-        return redirect()->route('dashboard.bendahara-stasi')->with('success', 'Laporan kolekte berhasil ditambahkan.');
+        return redirect()->route('laporan.status.bendahara')->with('success', 'Laporan kolekte berhasil ditambahkan.');
     }
 
     /**
@@ -69,8 +82,13 @@ class LaporanKolekteController extends Controller
      */
     public function indexBendahara()
     {
+
         $user = Auth::user();
         $query = LaporanKolekte::query();
+
+          // Mendapatkan tanggal 7 hari yang lalu dari hari ini
+        $lastDaysAgo = Carbon::today()->subDays(30);
+        $query->whereDate('tanggal_kolekte', '>=', $lastDaysAgo);
 
         if (!$user->isSuperAdmin()) {
             $stasiIdBendahara = $user->stasi_id;
