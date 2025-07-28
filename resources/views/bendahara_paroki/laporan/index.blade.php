@@ -168,7 +168,7 @@
             body {
                 padding-top: 0 !important; /* Reset body padding for desktop */
             }
-           header {
+            header {
                 position: relative !important;
                 /* PENGECILAN HEADER DI DESKTOP (sudah dilakukan sebelumnya) */
                 padding: 0.75rem 1.5rem !important;
@@ -324,10 +324,10 @@
                                             <span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full text-xs">Pending</span>
                                         @endif
                                     </td>
-                                   <td class="py-3  text-center">
+                                    <td class="py-3   text-center">
                                         @if ($laporan->status_bendahara_paroki == 'pending')
                                             <div class="flex items-center justify-center space-x-2 ">
-                                                <form action="{{ route('bendahara-paroki.laporan.validasi', $laporan->id) }}" method="POST">
+                                                <form action="{{ route('bendahara-paroki.laporan.validasi', $laporan->id) }}" method="POST" onsubmit="return confirmValidation()">
                                                     @csrf
                                                     <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg text-xs transition duration-300 shadow-md">Validasi</button>
                                                 </form>
@@ -346,13 +346,14 @@
         </div>
     </div>
 
-    {{-- Modal Penolakan --}}
-    <div id="rejectModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+  <div id="rejectModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-xl bg-white animate-fade-in-up">
             <h3 class="text-xl font-semibold text-gray-800 mb-4">Tolak Laporan Kolekte</h3>
-            <form id="rejectForm" method="POST">
+            <form id="rejectForm" method="POST" onsubmit="return validateRejectForm()">
                 @csrf
-                    <textarea name="catatan_revisi_bendahara_paroki" rows="4" class="shadow-sm border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4" placeholder="Masukkan catatan penolakan"></textarea>                <div class="flex justify-end gap-2">
+                <textarea name="catatan_revisi_bendahara_paroki" id="catatan_revisi_bendahara_paroki" rows="4" class="shadow-sm border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2" placeholder="Masukkan catatan penolakan"></textarea>
+                <p id="catatanError" class="text-red-500 text-xs italic mb-4 hidden">Catatan penolakan tidak boleh kosong dan minimal 10 karakter.</p>
+                <div class="flex justify-end gap-2">
                     <button type="button" onclick="hideRejectModal()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300">Batal</button>
                     <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">Tolak</button>
                 </div>
@@ -360,7 +361,7 @@
         </div>
     </div>
 
-    <script>
+<script>
         let currentLaporanId = null;
         function showRejectModal(laporanId) {
             currentLaporanId = laporanId;
@@ -368,12 +369,14 @@
             // Pastikan Anda menggunakan rute yang benar untuk penolakan Bendahara Paroki
             form.action = `/bendahara-paroki/laporan/${laporanId}/tolak`;
             document.getElementById('rejectModal').classList.remove('hidden');
+            document.getElementById('catatanError').classList.add('hidden'); // Sembunyikan pesan error sebelumnya
             document.body.classList.add('overflow-hidden'); // Prevent scrolling behind modal
         }
 
         function hideRejectModal() {
             document.getElementById('rejectModal').classList.add('hidden');
             document.getElementById('rejectForm').reset();
+            document.getElementById('catatanError').classList.add('hidden'); // Sembunyikan pesan error
             currentLaporanId = null;
             document.body.classList.remove('overflow-hidden'); // Restore scrolling
         }
@@ -396,6 +399,30 @@
                 document.body.classList.remove('overflow-hidden');
             }
         });
+
+        // Function to show alert on validation button click
+        function confirmValidation() {
+            return confirm("Apakah Anda yakin ingin memvalidasi laporan ini?");
+        }
+
+        // Function to validate the reject form
+        function validateRejectForm() {
+            const catatanInput = document.getElementById('catatan_revisi_bendahara_paroki');
+            const catatanError = document.getElementById('catatanError');
+            const catatanValue = catatanInput.value.trim();
+
+            // Atur ketentuan minimal karakter di sini (misal: 10 karakter)
+            const minLength = 10; 
+
+            if (catatanValue === '' || catatanValue.length < minLength) {
+                catatanError.textContent = `Catatan penolakan tidak boleh kosong dan minimal ${minLength} karakter.`;
+                catatanError.classList.remove('hidden'); // Tampilkan pesan error
+                return false; // Mencegah pengiriman formulir
+            } else {
+                catatanError.classList.add('hidden'); // Sembunyikan pesan error
+                return true; // Izinkan pengiriman formulir
+            }
+        }
     </script>
 </body>
 </html>

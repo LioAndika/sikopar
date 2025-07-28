@@ -11,7 +11,7 @@
                 .knowing-text {
                 display: none !important;
                 }}
-        @media print {
+     @media print {
             body {
                 -webkit-print-color-adjust: exact !important;
                 color-adjust: exact !important;
@@ -149,6 +149,7 @@
                 margin-top: 0;
                 page-break-inside: auto;
                 background-color: transparent !important;
+                border: 1px solid #000 !important; /* Border luar tabel */
             }
             thead {
                 display: table-header-group;
@@ -174,6 +175,13 @@
                 text-transform: none !important;
             }
 
+            /* Kolom Jumlah Kolekte di thead/tbody */
+            th:nth-child(4), /* Kolom Jumlah Kolekte di thead */
+            td:nth-child(4) { /* Kolom Jumlah Kolekte di tbody */
+                width: 25% !important; /* Sesuaikan persentase ini sesuai kebutuhan Anda */
+                text-align: right !important;
+            }
+
             .total-row td {
                 font-weight: bold !important;
                 background-color: transparent !important;
@@ -181,13 +189,14 @@
             }
             /* Penyesuaian khusus untuk sel total */
             .total-row td:nth-child(1) {
-                text-align: right; /* "Total Keseluruhan Kolekte:" rata kanan */
-                padding-right: 10px; /* Memberi sedikit ruang */
+                text-align: left; /* PERUBAHAN: "Total Keseluruhan Kolekte:" rata kiri */
+                /* padding-right: 10px; */ /* Dihapus karena text-align: left sudah cukup */
                 border-right: 1px solid #000 !important; /* Pastikan ada border pemisah */
             }
-            .total-row td:nth-child(2) { /* Kolom Jumlah Kolekte */
+            .total-row td:nth-child(2) { /* Kolom Jumlah Kolekte pada baris total */
                 text-align: right;
                 border-left: 1px solid #000 !important; /* Pastikan ada border pemisah */
+                width: 25% !important; /* Pastikan width-nya sama dengan th/td kolom ke-4 */
             }
 
 
@@ -220,6 +229,7 @@
             td:nth-child(4) {
                 border-right: 1px solid #000 !important;
             }
+
 
             /* ========================================================= */
 

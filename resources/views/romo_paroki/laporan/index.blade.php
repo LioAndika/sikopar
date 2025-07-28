@@ -152,7 +152,7 @@
                 padding-right: 0.75rem; /* DIKECILKAN: Tambahkan sedikit padding kiri dan kanan */
                 margin-top:1.5rem;
             }
-             /* Ukuran font untuk sidebar items di HP */
+            /* Ukuran font untuk sidebar items di HP */
             .sidebar-item {
                 font-size: 0.85rem; /* DIKECILKAN: Ukuran font item sidebar */
                 padding: 0.6rem 1rem; /* DIKECILKAN: Padding item sidebar */
@@ -174,10 +174,10 @@
 
         /* Desktop specific styles - reset mobile overrides */
         @media (min-width: 768px) {
-  body {
+            body {
                 padding-top: 0 !important; /* Reset body padding for desktop */
             }
-           header {
+            header {
                 position: relative !important;
                 /* PENGECILAN HEADER DI DESKTOP (sudah dilakukan sebelumnya) */
                 padding: 0.75rem 1.5rem !important;
@@ -276,7 +276,7 @@
             <img src="{{ asset('images/logo.jpg') }}" alt="Logo Paroki">
             SIKOPAR
         </div>
-          <nav class="mt-4">
+        <nav class="mt-4">
             <a href="{{ route('dashboard.romo-paroki') }}" class="sidebar-item {{ Request::routeIs('dashboard.romo-paroki') ? 'active' : '' }}">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m0 0l-7 7m7-7v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                 Dashboard
@@ -315,7 +315,7 @@
                 </button>
                 <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800">Laporan Kolekte Menunggu Validasi</h1>
             </div>
-           
+            
         </header>
 
         <div class="bg-white p-8 rounded-xl shadow-lg card-hover-effect">
@@ -415,6 +415,7 @@
                 <div class="mb-5">
                     <label for="catatan_revisi" class="block text-gray-700 text-sm font-semibold mb-2">Catatan Penolakan/Revisi:</label>
                     <textarea name="catatan_revisi_romo_paroki" id="catatan_revisi" rows="5" class="shadow-sm border border-gray-300 rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out" placeholder="Mohon masukkan alasan penolakan atau catatan revisi..."></textarea>
+                    <p id="catatanRevisiError" class="text-red-500 text-xs italic mt-2 hidden">Catatan revisi tidak boleh kosong dan minimal 10 karakter.</p>
                 </div>
                 <div class="modal-footer flex justify-end space-x-3">
                     <button type="button" onclick="hideRomoRejectModal()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg transition duration-150 ease-in-out">Batal</button>
@@ -449,17 +450,36 @@
         function showRomoRejectModal(laporanId) {
             currentRomoLaporanId = laporanId;
             const form = document.getElementById('romoRejectForm');
+            const catatanRevisiInput = document.getElementById('catatan_revisi');
+            const catatanRevisiError = document.getElementById('catatanRevisiError');
+
             form.action = `/romo-paroki/laporan/${laporanId}/tolak`; // Rute penolakan Romo Paroki
             document.getElementById('romoRejectModal').classList.remove('hidden');
-            // Optional: focus on textarea when modal opens
-            document.getElementById('catatan_revisi').focus();
+            catatanRevisiInput.value = ''; // Clear previous input
+            catatanRevisiError.classList.add('hidden'); // Hide error message
+            catatanRevisiInput.focus(); // Optional: focus on textarea when modal opens
         }
 
         function hideRomoRejectModal() {
             document.getElementById('romoRejectModal').classList.add('hidden');
             document.getElementById('romoRejectForm').reset();
+            document.getElementById('catatanRevisiError').classList.add('hidden'); // Hide error message on close
             currentRomoLaporanId = null;
         }
+
+        // Add event listener for form submission to validate
+        document.getElementById('romoRejectForm').addEventListener('submit', function(event) {
+            const catatanRevisiInput = document.getElementById('catatan_revisi');
+            const catatanRevisiValue = catatanRevisiInput.value.trim();
+            const catatanRevisiError = document.getElementById('catatanRevisiError');
+
+            if (catatanRevisiValue.length === 0 || catatanRevisiValue.length < 10) {
+                event.preventDefault(); // Prevent form submission
+                catatanRevisiError.classList.remove('hidden'); // Show error message
+            } else {
+                catatanRevisiError.classList.add('hidden'); // Hide error message if valid
+            }
+        });
 
         // Close modal when clicking outside of it
         document.getElementById('romoRejectModal').addEventListener('click', function(event) {

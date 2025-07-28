@@ -3,43 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Datang di Paroki Santo Yoseph Sidareja</title>
+    <title>Laporan Kolekte Divalidasi - Bendahara Paroki</title>
     @vite('resources/css/app.css')
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Menggunakan gambar background yang menutupi bagian hero pertama */
-        .hero-section {
-            background-image: url('{{ asset('images/landing.jpg') }}');
-            height: 70vh; /* Default height */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            /* Added for flex positioning of content inside hero */
-            display: flex;
-            flex-direction: column;
-            position: relative; /* Needed for absolute positioning of overlay */
-            min-height: 250px; /* Added min-height for very short screens */
-        }
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.2); /* **DIUBAH**: Dikurangi menjadi 0.2 untuk overlay yang lebih terang */
-            filter: blur(5px); /* Adjust the blur radius (5px) for more or less blur */
-            z-index: 0; /* Place the overlay behind the hero content */
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .text-with-custom-shadow {
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* Changed to a more neutral black shadow */
-        }
-
-        /* Style untuk efek hover pada card */
+        /* CSS Kustom untuk efek hover yang halus */
         .card-hover-effect {
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
@@ -47,526 +15,415 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-
-        /* Overlay untuk teks agar lebih terbaca */
-        .overlay-text-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black overlay for readability */
-            z-index: 0; /* Behind the content, above the image */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Custom sidebar active state */
+        .sidebar-item.active {
+            background-color:rgb(60, 128, 237); /* A slightly brighter blue for active */
+            color: white; /* Ensure text is white for active item */
+            font-weight: 600;
+        }
+        /* Ensure non-active sidebar items have visible text */
+        .sidebar-item {
+            display: flex; /* Use flexbox for icon and text alignment */
+            align-items: center; /* Vertically center icon and text */
+            padding: 0.75rem 1.5rem; /* py-3 px-6 */
+            margin: 0.5rem 0.75rem; /* mx-3 */
+            border-radius: 0.5rem; /* rounded-lg */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+            color:rgb(30, 71, 124); /* Default text color for all sidebar items */
+        }
+        .sidebar-item:not(.active):hover {
+            background-color: #e0e7ff; /* Light blue on hover for non-active items */
+            color: rgb(30, 71, 124); /* Ensure text color remains readable on hover */
+        }
+        .sidebar-item svg {
+            margin-right: 0.75rem; /* Space between icon and text */
+            color: currentColor; /* Ensures SVG icon color matches text color */
+        }
+        /* Style for SIKOPAR text and logo to make it black */
+        .sidebar-brand {
+            color: rgb(0, 0, 0); /* Warna hitam untuk teks SIKOPAR */
+            display: flex; /* Menggunakan flexbox untuk logo dan teks */
+            align-items: center; /* Memposisikan item secara vertikal di tengah */
+            justify-content: center; /* Memposisikan item secara horizontal di tengah */
+            background-color: white; /* BACKGROUND PUTIH UNTUK SIKOPAR TEXT */
+            /* === Perubahan untuk border abu-abu === */
+            border-bottom: 1px solid #e2e8f0; /* Warna abu-abu yang lebih terang (setara dengan border-gray-200) */
+            padding-bottom: 1rem; /* Ruang di bawah logo/teks sebelum border (pb-4) */
+            margin-bottom: 1rem; /* Ruang di bawah border sebelum item navigasi (mb-4) */
+            /* ===================================== */
+        }
+        .sidebar-brand img {
+            height: 2.5rem; /* Ukuran tinggi logo */
+            width: 2.5rem; /* Ukuran lebar logo (buat sama untuk proporsional) */
+            margin-right: 0.75rem; /* Jarak antara logo dan teks */
+            border-radius: 9999px; /* Membuat lingkaran jika gambar square */
         }
 
-        /* Dropdown specific styles */
-        .dropdown-menu {
-            position: absolute;
-            /* **PERUBAHAN KRUSIAL:** Set top secara eksplisit agar tidak menempel ke navbar */
-            /* Disesuaikan agar posisinya di bawah navbar dan tidak menutupi konten */
-            top: calc(100% + 15px); /* Meningkatkan jarak menjadi 15px dari navbar */
-            right: 0; /* Tetap di kanan */
-            background-color: rgba(30, 58, 138, 0.9);
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-            max-height: 0;
-            opacity: 0;
-            z-index: 50;
-            width: max-content;
-            min-width: 150px;
-            padding: 0;
-            /* Pastikan display none secara default untuk menyembunyikan sebelum transisi */
-            display: none;
+        /* PERUBAHAN UTAMA UNTUK SIDEBAR BACKGROUND */
+        .sidebar-container { /* Kelas baru untuk sidebar */
+            background-color: white; /* Background putih untuk sidebar utama */
+            color: #334155; /* Default text color, sesuaikan jika perlu */
         }
 
-        .dropdown-menu.active {
-            max-height: 180px; /* Diperluas untuk menampung item "Informasi" */
-            opacity: 1;
-            padding: 0.4rem 0;
-            display: flex; /* Aktifkan display flex saat aktif */
-            flex-direction: column; /* Pastikan item vertikal */
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 0.4rem 1rem;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.2s;
-            font-size: 0.9rem;
-            line-height: 1.2;
-        }
-
-        .dropdown-menu a:hover {
-            background-color: rgba(49, 130, 206, 0.9);
-        }
-        /* Style untuk panah dropdown */
-        #dropdown-arrow {
-            transition: transform 0.3s ease;
-        }
-
-        #dropdown-arrow.rotate-180 {
-            transform: rotate(180deg);
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 767px) { /* Adjustments for screens smaller than 'md' breakpoint */
-            .hero-section {
-                height: 40vh; /* Make hero section a bit shorter on mobile (perkecil gambar bagian pertama) */
+        
+        /* Mobile-specific styles for the hamburger menu and header */
+        @media (max-width: 767px) { /* Tailwind's 'md' breakpoint is 768px, so less than that is mobile */
+            .sidebar-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 200px; /* DIKECILKAN: Lebar sidebar di mode HP */
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 21; /* Ensure sidebar is above header */
+                box-shadow: 2px 0 5px rgba(0,0,0,0.2); /* Tambahkan shadow untuk visual */
             }
-
-            /* Navbar Adjustments */
-            nav {
-                padding: 0.75rem 1rem; /* Adjust padding for mobile navbar */
-                z-index: 40; /* **PERUBAHAN:** Pastikan navbar memiliki z-index yang lebih tinggi */
+            .sidebar-container.active {
+                transform: translateX(0);
             }
-            .navbar-brand img {
-                height: 2rem; /* Slightly smaller logo on mobile */
-                width: 2rem;
-                margin-right: 0.5rem; /* Reduce margin */
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 20; /* Below sidebar, above content */
+                display: none;
             }
-            .navbar-brand span {
-                font-size: 0.7rem; /* Smaller font for brand name on mobile */
-                white-space: normal; /* Allow wrapping of brand name */
-                line-height: 1.2; /* Adjust line height for wrapped text */
-                text-align: left; /* Align text left */
+            .overlay.active {
+                display: block;
             }
-            .navbar-desktop-nav {
-                display: none; /* Hide desktop nav links on mobile */
+            /* Adjusted padding for the body to ensure header content is visible */
+            body {
+                padding-top: 5rem; /* Increased from 4rem for more space */
             }
-            .navbar-mobile-nav {
-                display: flex; /* Show mobile nav on mobile */
-                align-items: center;
-                justify-content: flex-end; /* Align items to the right */
-                position: relative; /* For dropdown positioning */
-                flex-grow: 1; /* Allow it to take available space */
-            }
-            .navbar-mobile-nav .login-button { /* Target login button inside mobile nav specifically */
-                padding: 0.3rem 0.6rem; /* Smaller padding for button */
-                font-size: 0.5rem; /* Smaller font for button */
-                white-space: nowrap; /* Prevent button text wrapping */
-            }
-            .mobile-dropdown-toggle {
-                cursor: pointer;
+             header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 10; /* Ensure header is above main content */
+                background-color: white; /* Ensure header has a background */
+                padding: 0.4rem 0.8rem; /* DIKECILKAN: Adjusted header padding for mobile to be smaller */
                 display: flex;
+                justify-content: space-between;
                 align-items: center;
-                color: white;
-                margin-right: 0.5rem; /* Reduced space between dropdown toggle and login button */
-                white-space: nowrap; /* Prevent text and icon from wrapping */
-                padding: 8px 12px; /* Tambahkan padding agar lebih mudah diklik */
-                background-color: rgba(255, 255, 255, 0.1); /* Sedikit latar belakang agar terlihat */
-                border-radius: 9999px; /* Bentuk pil */
-                outline: none; /* Remove default outline */
-                transition: all 0.2s ease-in-out;
+                border-bottom: 1px solid #e2e8f0; /* Optional: add a border to header */
+                margin-bottom: 1rem; /* Memberi jarak bawah header di mobile */
             }
-            .mobile-dropdown-toggle:focus {
-                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 0 0 0 4px rgba(252, 211, 77, 0.75); /* yellow-400, opacity-75 */
+            header h1 {
+                font-size: 0.8rem; /* DIKECILKAN: Further reduced font size for mobile header */
+                font-weight: bold;
+                color: #374151; /* Match general text color */
             }
-
-            /* **PERUBAHAN KRUSIAL:** Posisi dropdown untuk mobile */
-            .dropdown-menu {
-                top: calc(100% + 15px); /* Atur posisi dropdown di bawah navbar, sama dengan di atas */
-                right: 1rem; /* Beri jarak dari sisi kanan layar */
-                left: auto; /* Pastikan tidak ada konflik dengan left:0 */
-                z-index: 50; /* **PERUBAHAN:** Pastikan dropdown memiliki z-index yang lebih tinggi */
+            header h1 svg {
+                display: none; /* HIDE SVG ICON ON MOBILE */
             }
-
-            /* Hero Text Adjustments */
-            .overlay-text {
-                padding: 1rem; /* Reduce padding on mobile */
-                z-index: 10; /* **PERUBAHAN:** Teks selamat datang harus di bawah dropdown, tapi di atas overlay */
+            /* Show welcome message on mobile but with smaller text */
+            header .mobile-welcome {
+                display: none; /* Show on mobile */
+                font-size: 0.875rem; /* text-sm */
+                text-align: right;
             }
-            .overlay-text h1 {
-                font-size: 1rem; /* Adjust h1 font size for mobile */
-                margin-bottom: 0.25rem; /* Reduce margin */
+            header .desktop-welcome {
+                display: none; /* Hide desktop welcome on mobile */
             }
-            .overlay-text p {
-                font-size: 0.7rem; /* Adjust p font size for mobile */
+            #burger-btn {
+                z-index: 22; /* Ensure burger button is clickable above sidebar */
             }
-
-            /* Main content section adjustments */
-            .container.mx-auto {
-                padding: 1rem; /* Adjust padding for container */
-                margin-top: -3rem; /* Lift it up less on mobile */
+            /* Ensure the main content doesn't have an additional top padding on mobile */
+            .main-content {
+                padding-top: 0;
+                padding-left: 0.75rem; /* DIKECILKAN: Tambahkan sedikit padding kiri dan kanan */
+                padding-right: 0.75rem; /* DIKECILKAN: Tambahkan sedikit padding kiri dan kanan */
+                margin-top:1.5rem;
+            }
+             /* Ukuran font untuk sidebar items di HP */
+            .sidebar-item {
+                font-size: 0.85rem; /* DIKECILKAN: Ukuran font item sidebar */
+                padding: 0.6rem 1rem; /* DIKECILKAN: Padding item sidebar */
             }
 
-            /* Card adjustments */
-            .grid-cols-1.md\:grid-cols-3 {
-                grid-template-columns: 1fr; /* Stack cards in a single column */
+            /* Ukuran logo dan teks SIKOPAR di HP */
+            .sidebar-brand img {
+                height: 2rem; /* DIKECILKAN: Ukuran tinggi logo */
+                width: 2rem; /* DIKECILKAN: Ukuran lebar logo */
+                margin-right: 0.5rem; /* DIKECILKAN: Jarak antara logo dan teks */
             }
+            .sidebar-brand {
+                font-size: 1.5rem; /* DIKECILKAN: Ukuran font SIKOPAR */
+                padding-top: 0.75rem; /* DIKECILKAN */
+                padding-bottom: 0.75rem; /* DIKECILKAN */
+            }
+            
+        }
 
-            /* --- START: PENYESUAIAN CARD BARU UNTUK MOBILE --- */
-            /* Mengurangi padding card secara keseluruhan */
-            .card-hover-effect {
-                padding: 1rem; /* Mengurangi padding card di mobile dari p-6 (1.5rem) */
+        /* Desktop specific styles - reset mobile overrides */
+        @media (min-width: 768px) {
+            body {
+                padding-top: 0 !important; /* Reset body padding for desktop */
             }
-            /* Mengurangi tinggi gambar di dalam card */
-            .card-hover-effect img {
-                height: 8rem; /* Mengurangi tinggi gambar di dalam card dari h-48 (12rem) */
+            header {
+                position: relative !important;
+                /* PENGECILAN HEADER DI DESKTOP (sudah dilakukan sebelumnya) */
+                padding: 0.75rem 1.5rem !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                border-bottom: none !important;
+                margin-bottom: 2rem !important; /* Menambahkan jarak yang lebih besar untuk desktop */
             }
-            /* Mengurangi ukuran judul card */
-            .card-hover-effect h3 {
-                font-size: 1.25rem; /* Mengurangi ukuran judul card dari text-2xl (1.5rem) */
-                margin-bottom: 0.5rem; /* Sesuaikan margin bawah judul */
+            header h1 {
+                /* PENGECILAN FONT HEADER DI DESKTOP (sudah dilakukan sebelumnya) */
+                font-size: 1.75rem !important;
             }
-            /* Mengurangi ukuran paragraf di card */
-            .card-hover-effect p {
-                font-size: 0.8rem; /* Mengurangi ukuran paragraf di card */
+            header .mobile-welcome {
+                display: none !important; /* Hide mobile welcome on desktop */
             }
-            /* Mengurangi ukuran teks link "Klik Disini" di card */
-            .card-hover-effect a {
-                font-size: 0.8rem; /* Mengurangi ukuran teks link di card */
+            header .desktop-welcome {
+                display: flex !important; /* Show desktop welcome on desktop */
+                align-items: center; /* Vertically align items in desktop welcome */
             }
-            /* --- END: PENYESUAIAN CARD BARU UNTUK MOBILE --- */
-
-
-            /* Jadwal Misa alignment for Mobile */
-            .misa-entry {
-                display: flex; /* Gunakan flexbox untuk setiap baris */
-                justify-content: space-between; /* Menjaga teks hari di kiri dan waktu di kanan */
-                width: 100%; /* Memastikan setiap baris mengambil lebar penuh */
-                margin-bottom: 0.2rem; /* Jarak antar baris */
-            }
-            .misa-day {
-                text-align: left;
-                flex-basis: 55%; /* Beri ruang lebih untuk teks hari */
-                font-size: 0.9rem; /* Ukuran font lebih kecil */
-            }
-            .misa-time {
-                text-align: right; /* Jam di kanan */
-                flex-basis: 45%; /* Sisa ruang untuk jam */
-                font-size: 0.9rem; /* Ukuran font lebih kecil */
-            }
-
-
-            /* Footer adjustments */
-            .footer-grid {
-                grid-template-columns: 1fr; /* Stack footer columns */
-                text-align: center; /* Center text in footer columns */
-            }
-            .footer-grid > div {
-                margin-bottom: 1.5rem; /* Add some space between stacked footer sections */
-            }
-            .footer-brand { /* Ensure vertical stack and center for footer brand */
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .footer-brand img {
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: 1rem; /* Adjust margin for logo */
-            }
-            .footer-brand h2 {
-                margin-left: auto; /* Center text below logo */
-                margin-right: auto;
-                font-size: 1rem; /* Smaller font for brand name on mobile */
-            }
-            .footer-grid p, .footer-grid li {
-                font-size: 0.75rem; /* Smaller font for footer text */
-            }
-            .footer-grid ul {
-                padding-left: 0; /* Remove default ul padding */
-                list-style: none; /* Remove list bullets */
-            }
-            .footer-grid ul li {
-                margin-bottom: 0.4rem; /* Space out list items */
-            }
-            .footer-grid .flex.items-center {
-                justify-content: center; /* Center icons with text */
+            header .desktop-welcome span {
+                font-size: 0.95rem; /* Slightly smaller welcome text for desktop */
             }
         }
 
-        /* Desktop specific adjustments */
-        @media (min-width: 768px) {
-            .hero-section {
-                height: 70vh; /* Restore default height for desktop */
-            }
-            /* Navbar Desktop specific styles */
-            nav {
-                padding: 1rem 2.5rem; /* Default padding for desktop navbar */
-                z-index: 40; /* **PERUBAHAN:** Pastikan navbar memiliki z-index yang lebih tinggi */
-            }
-            .navbar-brand img {
-                height: 2.5rem; /* Default desktop logo size */
-                width: 2.5rem;
-                margin-right: 0.75rem;
-            }
-            .navbar-brand span {
-                font-size: 1.5rem; /* Default desktop font size */
-                white-space: nowrap; /* Prevent wrapping */
-            }
-            .navbar-desktop-nav {
-                display: flex; /* Show desktop nav links on desktop */
-                align-items: center;
-            }
-            .navbar-mobile-nav {
-                display: none; /* Hide mobile nav on desktop */
-            }
-            .login-button {
-                padding: 0.5rem 1.5rem; /* Default desktop button padding */
-                font-size: 1rem; /* Default desktop button font size */
-            }
-            /* Hero Text Desktop adjustments */
-            .overlay-text {
-                padding: 2rem;
-                z-index: 10; /* **PERUBAHAN:** Teks selamat datang harus di bawah dropdown, tapi di atas overlay */
-            }
-            .overlay-text h1 {
-                font-size: 2.5rem; /* Adjust h1 font size for desktop */
-                margin-bottom: 1rem;
-            }
-            .overlay-text p {
-                font-size: 1.25rem; /* Adjust p font size for desktop */
-            }
-            /* Footer desktop specific styles for brand block */
-            .footer-brand {
-                flex-direction: column; /* Ensure vertical stack */
-                align-items: center; /* Center horizontally for mobile */
-                text-align: center;
-            }
-            .footer-brand img {
-                margin-left:0;
-                margin-right:0;
-            }
-            .footer-brand h2 {
-                margin-left: 0;
-                margin-right: 0;
-                font-size: 1.25rem; /* Default desktop font size */
-            }
-            .footer-grid p, .footer-grid li {
-                font-size: 1rem; /* Default desktop font size */
-            }
-            .footer-grid ul {
-                padding-left: 1.25rem; /* Restore default ul padding */
-                list-style: disc; /* Restore list bullets */
-            }
-            .footer-grid .flex.items-center {
-                justify-content: flex-start; /* Align to start on desktop */
-            }
-
-            /* Jadwal Misa alignment for Desktop */
-            .misa-entry {
-                display: flex; /* Use flexbox for each row */
-                justify-content: space-between; /* Space out day and time */
-                width: 100%; /* Ensure full width */
-                margin-bottom: 0.5rem; /* Jarak antar baris */
-            }
-            .misa-day {
-                text-align: left;
-                flex-basis: 50%; /* Beri ruang untuk teks hari */
-                font-size: 1rem; /* Ukuran font default */
-            }
-            .misa-time {
-                text-align: right; /* Changed to right align on desktop for better readability */
-                flex-basis: 50%; /* Sisa ruang untuk jam */
-                font-size: 1rem; /* Ukuran font default */
-            }
+        /* Gaya baru untuk teks tabel */
+        .table-text-style {
+            font-size: 0.6rem; /* Slightly larger than text-sm (0.875rem) */
+            color: #334155; /* slate-700, warna teks umum yang lebih gelap */
+        }
+        .table-header-text-style {
+            font-size: 0.8rem; /* Lebih kecil dari body teks */
+            color: #4A5568; /* gray-700 */
+            font-weight: 600; /* semi-bold */
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans antialiased">
+<body class="bg-gray-100 font-sans leading-normal tracking-normal min-h-screen flex flex-col md:flex-row">
+    <div id="sidebar-overlay" class="overlay" onclick="toggleSidebar()"></div>
 
-    {{-- Hero Section (Bagian Atas dengan Gambar Background dan Teks Selamat Datang) --}}
-    <div class="hero-section relative">
-        <div class="hero-overlay"></div>
-        <div class="overlay-text-container"></div>
-
-        {{-- Navbar Sederhana dengan Logo dan Tombol Login --}}
-        <nav class="bg-blue-900 p-4 text-white flex justify-between items-center relative z-40 shadow-md">
-            {{-- Logo Paroki dan Nama Paroki --}}
-            <div class="flex items-center navbar-brand">
-                <a href="{{ route('landing') }}" class="flex items-center">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="Logo Paroki" class="h-10 w-10 mr-3 rounded-full border border-white">
-                    <span class="text-xl md:text-2xl font-bold">PAROKI SANTO YOSEPH SIDAREJA</span>
-                </a>
-            </div>
-
-            {{-- Bagian Kanan Navbar (Desktop) --}}
-            <div class="hidden md:flex items-center space-x-6 navbar-desktop-nav">
-                <a href="{{ route('landing') }}" class="underline text-yellow-300 hover:text-yellow-400 transition-colors duration-200">Beranda</a>
-                <a href="{{ route('profil-gereja') }}" class="hover:text-yellow-400 transition-colors duration-200">Profil Gereja</a>
-                <a href="{{ route('kegiatan-agenda') }}" class="hover:text-yellow-400 transition-colors duration-200">Kegiatan/Agenda</a>
-                <a href="{{ route('galeri') }}" class="hover:text-yellow-400 transition-colors duration-200">Galeri</a>
-                {{-- Tambahkan Navbar untuk Halaman Informasi --}}
-                <a href="{{ route('informasi') }}" class="hover:text-yellow-400 transition-colors duration-200">Informasi</a>
-                <a href="{{ route('login') }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-full transition duration-300 shadow-lg login-button">
-                    LOGIN SIKOPAR
-                </a>
-            </div>
-
-            {{-- Bagian Kanan Navbar (Mobile) --}}
-            <div class="md:hidden flex items-center space-x-2 relative navbar-mobile-nav flex-grow justify-end">
-                {{-- Dropdown Toggle (Panah ke Bawah) --}}
-                <div class="mobile-dropdown-toggle" id="mobile-dropdown-toggle" aria-haspopup="true" aria-expanded="false" tabindex="0">
-                    <span class="text-white text-sm mr-1">Menu</span>
-                    <svg class="w-4 h-4 text-white transform transition-transform duration-300" id="dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </div>
-                {{-- Tombol Login untuk Mobile --}}
-                <a href="{{ route('login') }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-full transition duration-300 shadow-lg login-button">
-                    LOGIN SIKOPAR
-                </a>
-
-                {{-- Dropdown Menu --}}
-                <div id="mobile-dropdown-menu" class="dropdown-menu" role="menu" aria-labelledby="mobile-dropdown-toggle">
-                    <a href="{{ route('landing') }}" class="dropdown-item underline text-yellow-300 bg-blue-700 hover:text-yellow-400" role="menuitem">Beranda</a>
-                    <a href="{{ route('profil-gereja') }}" class="dropdown-item" role="menuitem">Profil Gereja</a>
-                    <a href="{{ route('kegiatan-agenda') }}" class="dropdown-item" role="menuitem">Kegiatan/Agenda</a>
-                    <a href="{{ route('galeri') }}" class="dropdown-item" role="menuitem">Galeri</a>
-                    {{-- Tambahkan item "Informasi" di dropdown mobile --}}
-                    <a href="{{ route('informasi') }}" class="dropdown-item" role="menuitem">Informasi</a>
-                </div>
-            </div>
+    {{-- Sidebar --}}
+    <div id="sidebar" class="sidebar-container flex-none w-full md:w-64 pb-4 md:pb-0 shadow-lg z-10 md:relative">
+        <div class="p-6 text-center text-2xl font-extrabold sidebar-brand">
+            <img src="{{ asset('images/logo.jpg') }}" alt="Logo Paroki">
+            SIKOPAR
+        </div>
+        <nav class="mt-4">
+            <a href="{{ route('dashboard.bendahara-paroki') }}" class="sidebar-item {{ Request::routeIs('dashboard.bendahara-paroki') ? 'active' : '' }}">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m0 0l-7 7m7-7v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                Dashboard
+            </a>
+            <a href="{{ route('bendahara-paroki.laporan.index') }}" class="sidebar-item {{ Request::routeIs('bendahara-paroki.laporan.index') ? 'active' : '' }}">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                Validasi Laporan Ketua Stasi
+            </a>
+            <a href="{{ route('bendahara-paroki.laporan.menunggu-romo') }}" class="sidebar-item {{ Request::routeIs('bendahara-paroki.laporan.menunggu-romo') ? 'active' : '' }}">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v2.47A2.91 2.91 0 006 14h0"></path></svg>
+                Laporan Menunggu Romo Paroki
+            </a>
+            <a href="{{ route('bendahara-paroki.laporan.final') }}" class="sidebar-item {{ Request::routeIs('bendahara-paroki.laporan.final') ? 'active' : '' }}">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Laporan Kolekte Final
+            </a>
+            <a href="{{ route('bendahara-paroki.laporan.history.bendahara-paroki') }}" class="sidebar-item {{ Request::routeIs('bendahara-paroki.laporan.history.bendahara-paroki') ? 'active' : '' }}">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg> {{-- Ikon untuk Riwayat --}}
+            Riwayat Laporan Final
+        </a>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();" class="sidebar-item hover:bg-red-700 mt-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Logout
+            </a>
+            <form id="logout-form-sidebar" action="{{ route('logout') }}" method="POST" class="hidden">
+                @csrf
+            </form>
         </nav>
-        {{-- Content Teks Selamat Datang di atas gambar --}}
-        <main class="flex-grow flex mt-12 justify-center p-4 relative z-10">
-            <div class="text-center text-white overlay-text shadow-xl max-w-2xl mx-auto">
-                <h1 class="text-2xl md:text-4xl font-bold mb-4 text-with-custom-shadow">Selamat Datang Di Website</h1>
-                <p class="text-1xl md:text-xl font-semibold text-with-custom-shadow">Gereja Paroki Santo Yoseph Sidareja</p>
-            </div>
-        </main>
     </div>
 
-    {{-- Konten Utama yang Bisa Di-scroll (Di Bawah Hero Section) --}}
-    <div class="container mx-auto p-6 md:p-10 bg-gray-100 -mt-20 relative z-20 rounded-t-xl shadow-lg">
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {{-- Card Jadwal Misa --}}
-            <div class="bg-white p-6 rounded-xl shadow-lg card-hover-effect flex flex-col card-jadwal-misa">
-                <img src="{{ asset('images/jadwal_misa_card.jpg') }}" alt="Jadwal Misa" class="w-full h-48 object-cover rounded-t-lg mb-4">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">Jadwal Misa</h3>
-                <div class="misa-times flex-grow">
-                    {{-- Setiap jadwal misa adalah satu baris flexbox --}}
-                    <div class="misa-entry">
-                        <h5 class="misa-day">Senin-Jumat</h5>
-                        <h5 class="misa-time">05 . 30</h5>
-                    </div>
-                    <div class="misa-entry">
-                        <h5 class="misa-day">Sabtu</h5>
-                        <h5 class="misa-time">18 . 00</h5>
-                    </div>
-                    <div class="misa-entry">
-                        <h5 class="misa-day">Minggu</h5>
-                        <h5 class="misa-time">07 . 00</h5>
-                    </div>
+    {{-- Main Content --}}
+    <div class="flex-grow p-6 md:p-10 main-content">
+        <header class="bg-white rounded-xl shadow-lg flex items-center justify-between mb-8">
+            <div class="flex items-center">
+                <button id="burger-btn" class="md:hidden mr-4 p-2 focus:outline-none focus:bg-gray-200 rounded-md" onclick="toggleSidebar()">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <h1 class="text-4xl font-extrabold text-gray-800">Laporan Kolekte yang Menunggu Validasi Bendahara Paroki</h1>
+            </div>
+            <div class="desktop-welcome flex items-center space-x-4">
+                <span class="text-gray-700 text-lg">Selamat datang, <span class="font-bold text-blue-700">{{ Auth::user()->name }}!</span></span>
+            </div>
+            <div class="mobile-welcome md:hidden">
+                <span class="text-gray-700 text-sm">Selamat datang, <span class="font-bold text-blue-700">{{ Auth::user()->name }}!</span></span>
+            </div>
+        </header>
+
+        <div class="bg-white p-8 rounded-xl shadow-lg card-hover-effect">
+            @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg relative mb-4 shadow-md" role="alert">
+                    <strong class="font-bold">Berhasil!</strong>
+                    <span class="block sm:inline">{{ session('success') }}</span>
                 </div>
-                {{-- Arahkan ke halaman informasi --}}
-                <a href="{{ route('informasi') }}" class="text-yellow-600 hover:text-yellow-800 font-semibold mt-auto">Klik Disini</a>
-            </div>
+            @endif
+            @if (session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4 shadow-md" role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block sm:inline">{{ session('error') }}</span>
+                </div>
+            @endif
 
-            {{-- Card Pengumuman --}}
-            <div class="bg-white p-6 rounded-xl shadow-lg card-hover-effect flex flex-col">
-                <img src="{{ asset('images/pengumuman_card.jpg') }}" alt="Pengumuman" class="w-full h-48 object-cover rounded-t-lg mb-4">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">Pengumuman</h3>
-                <p class="text-gray-700 mb-4 flex-grow">
-                    "Pengumman Minggu ini belum dibuat. Silahkan cek kembali nanti untuk melihat pengumuman terbaru."
-                </p>
-                {{-- Arahkan ke halaman informasi --}}
-                <a href="{{ route('informasi') }}" class="text-yellow-600 hover:text-yellow-800 font-semibold mt-auto">Klik Disini</a>
-            </div>
+           <h2 class="text-['1rem'] font-semibold text-gray-800 mb-5 border-b pb-3 border-gray-200 flex items-center">
+    <svg class="w-6 h-6 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" clip-rule="evenodd"></path></svg>
+    Daftar Laporan Kolekte yang Menunggu Validasi Anda
+</h2>
 
-            {{-- Card Tentang Gereja --}}
-            <div class="bg-white p-6 rounded-xl shadow-lg card-hover-effect flex flex-col">
-                <img src="{{ asset('images/tentang_gereja_card.jpg') }}" alt="Tentang Gereja" class="w-full h-48 object-cover rounded-t-lg mb-4">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">Tentang Gereja</h3>
-                <p class="text-gray-700 mb-4 flex-grow">
-                    "Gereja Santo Yoseph yang bernama resmi Gereja Paroki Santo Yoseph, Sidareja adalah sebuah gereja paroki Katolik yang terletak di Kabupaten Cilacap, Jawa Tengah, Indonesia. Gereja ini didedikasikan kepada Santo Yoseph. Gereja ini berada di bawah naungan yurisdiksi Keuskupan Purwokerto.
-                </p>
-                <a href="{{ route('profil-gereja') }}" class="text-yellow-600 hover:text-yellow-800 font-semibold mt-auto">Klik Disini</a>
-            </div>
-        </section>
+            @if ($laporanKolektes->isEmpty())
+                <p class="text-gray-600 text-center py-4">Tidak ada laporan kolekte yang menunggu validasi dari Anda.</p>
+            @else
+                <div class="overflow-x-auto rounded-lg shadow-sm border border-gray-200">
+                    <table class="min-w-full bg-white ">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-700 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left table-header-text-style">Tanggal Kolekte</th>
+                                <th class="py-3 px-6 text-left table-header-text-style">Asal Stasi</th>
+                                <th class="py-3 px-6 text-left table-header-text-style">Jumlah</th>
+                                <th class="py-3 px-6 text-center table-header-text-style">Status Ketua Stasi</th>
+                                <th class="py-3 px-6 text-center table-header-text-style">Status Bendahara Paroki</th>
+                                <th class="py-3 px-6 text-center table-header-text-style ">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm font-light divide-y divide-gray-200">
+                            @foreach ($laporanKolektes as $laporan)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-6 whitespace-nowrap text-left pl-9">{{ $laporan->tanggal_kolekte->format('d M Y') }}</td>
+                                    <td class="py-3 px-6 text-left pl-4">{{ $laporan->stasi->nama ?? 'Stasi Tidak Dikenal' }}</td>
+                                    <td class="py-3 px-6 text-left ">Rp {{ number_format($laporan->jumlah_kolekte, 2, ',', '.') }}</td>
+                                    <td class="py-3 px-6 text-center">
+                                        @if ($laporan->status_ketua_stasi == 'divalidasi')
+                                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full text-xs">Divalidasi</span>
+                                        @elseif ($laporan->status_ketua_stasi == 'ditolak')
+                                            <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full text-xs">Ditolak</span>
+                                        @else
+                                            <span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full text-xs">Pending</span>
+                                        @endif
+                                    </td>
+                                    {{-- Menampilkan Status Bendahara Paroki --}}
+                                    <td class="py-3 px-6 text-center">
+                                        @if ($laporan->status_bendahara_paroki == 'divalidasi')
+                                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full text-xs">Divalidasi</span>
+                                        @elseif ($laporan->status_bendahara_paroki == 'ditolak')
+                                            <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full text-xs">Ditolak</span>
+                                        @else
+                                            <span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full text-xs">Pending</span>
+                                        @endif
+                                    </td>
+                                    <td class="py-3   text-center">
+                                        @if ($laporan->status_bendahara_paroki == 'pending')
+                                            <div class="flex items-center justify-center space-x-2 ">
+                                                <form action="{{ route('bendahara-paroki.laporan.validasi', $laporan->id) }}" method="POST" onsubmit="return confirmValidation()">
+                                                    @csrf
+                                                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg text-xs transition duration-300 shadow-md">Validasi</button>
+                                                </form>
+                                                <button onclick="showRejectModal({{ $laporan->id }})" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg text-xs transition duration-300 shadow-md">Tolak</button>
+                                            </div>
+                                        @else
+                                            <span class="text-gray-500 text-xs table-text-style">Sudah Diproses</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
     </div>
 
-    {{-- Footer --}}
-    <footer class="bg-blue-950 text-gray-200 py-10">
-        <div class="container mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-4 gap-8 footer-grid">
-            {{-- Logo dan Nama Paroki di Footer --}}
-            <div class="flex flex-col items-center text-center footer-brand">
-                <img src="{{ asset('images/logo.jpg') }}" alt="Logo Paroki" class="h-20 w-20 mb-4 rounded-full border-2 border-gray-400">
-                <h2 class="text-lg font-semibold text-gray-50">PAROKI SANTO YOSEPH</h2>
-                <h2 class="text-lg font-semibold text-gray-50">SIDAREJA</h2>
-            </div>
-
-            {{-- Kontak Kami --}}
-            <div>
-                <h4 class="text-lg font-semibold mb-4 text-gray-50">Kontak Kami</h4>
-                <p class="flex items-center mb-2 justify-center md:justify-start">
-                    <svg class="w-5 h-5 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm-1 9a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                    Jl Ranggaesera No. 596, Sidareja - Cilacap 53213, Jawa Tengah
-                </p>
-                <p class="flex items-center mb-2 justify-center md:justify-start">
-                    <svg class="w-5 h-5 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.956.7L6.5 6H8V3a1 1 0 011-1h4a1 1 0 011 1v3h1.347l.391-2.3A1 1 0 0117 2h2a1 1 0 011 1v14a1 1 0 01-1 1h-2a1 1 0 01-1-1v-4.153a1 1 0 01-.7-.956L14.5 14H12v3a1 1 0 01-1 1H7a1 1 0 01-1-1v-3H4.653l-.391 2.3A1 1 0 013 18H2a1 1 0 01-1-1V3a1 1 0 011-1zM5 4h10v2H5V4zm0 4h10v2H5V8zm0 4h10v2H5v-2z" clip-rule="evenodd" fill-rule="evenodd"></path><path d="M3 8a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H4a1 1 0 01-1-1V8z"></path></svg>
-                    (0280) 523896
-                </p>
-                <p class="flex items-center justify-center md:justify-start">
-                    <svg class="w-5 h-5 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-                    paroki.santosyoseph@gmail.com
-                </p>
-            </div>
-
-            {{-- Jadwal Buka Sekretariat --}}
-            <div>
-                <h4 class="text-lg font-semibold mb-4 text-gray-50">Jadwal Buka Sekretariat</h4>
-                <p class="mb-1 text-gray-300">Senin - Jumat</p>
-                <p class="text-sm text-gray-400 mb-3">08.00 - 15.00</p>
-                <p class="mb-1 text-gray-300">Sabtu - Minggu</p>
-                <p class="text-sm text-gray-400">Tutup</p>
-            </div>
-
-            {{-- Peta Situs (Diperbarui untuk menyertakan "Informasi") --}}
-            <div>
-                <h4 class="text-lg font-semibold mb-4 text-gray-50">Peta Situs</h4>
-                <ul class="text-gray-300">
-                    <li class="mb-2"><a href="{{ route('profil-gereja') }}" class="hover:text-white transition-colors duration-200 focus:text-white focus:outline-none">Profil Gereja</a></li>
-                    <li class="mb-2"><a href="{{ route('kegiatan-agenda') }}" class="hover:text-white transition-colors duration-200 focus:text-white focus:outline-none">Kegiatan/Agenda</a></li>
-                    <li class="mb-2"><a href="{{ route('galeri') }}" class="hover:text-white transition-colors duration-200 focus:text-white focus:outline-none">Galeri</a></li>
-                    {{-- Tambahkan link untuk Informasi di footer --}}
-                    <li class="mb-2"><a href="{{ route('informasi') }}" class="hover:text-white transition-colors duration-200 focus:text-white focus:outline-none">Informasi</a></li>
-                </ul>
-            </div>
+    {{-- Modal Penolakan --}}
+    <div id="rejectModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-xl bg-white animate-fade-in-up">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Tolak Laporan Kolekte</h3>
+            <form id="rejectForm" method="POST" onsubmit="return validateRejectForm()">
+                @csrf
+                <textarea name="catatan_revisi_bendahara_paroki" id="catatan_revisi_bendahara_paroki" rows="4" class="shadow-sm border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2" placeholder="Masukkan catatan penolakan"></textarea>
+                <p id="catatanError" class="text-red-500 text-xs italic mb-4 hidden">Catatan penolakan tidak boleh kosong dan minimal 10 karakter.</p>
+                <div class="flex justify-end gap-2">
+                    <button type="button" onclick="hideRejectModal()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300">Batal</button>
+                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">Tolak</button>
+                </div>
+            </form>
         </div>
-        <div class="mt-8 text-center text-gray-500 text-sm border-t border-gray-800 pt-6">
-            &copy; Created by Stefanus Cecilio 2025 Paroki Santo Yoseph Sidareja.
-        </div>
-    </footer>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const dropdownToggle = document.getElementById('mobile-dropdown-toggle');
-            const dropdownMenu = document.getElementById('mobile-dropdown-menu');
-            const dropdownArrow = document.getElementById('dropdown-arrow');
+        let currentLaporanId = null;
+        function showRejectModal(laporanId) {
+            currentLaporanId = laporanId;
+            const form = document.getElementById('rejectForm');
+            // Pastikan Anda menggunakan rute yang benar untuk penolakan Bendahara Paroki
+            form.action = `/bendahara-paroki/laporan/${laporanId}/tolak`;
+            document.getElementById('rejectModal').classList.remove('hidden');
+            document.getElementById('catatanError').classList.add('hidden'); // Sembunyikan pesan error sebelumnya
+            document.body.classList.add('overflow-hidden'); // Prevent scrolling behind modal
+        }
 
-            if (dropdownToggle && dropdownMenu && dropdownArrow) {
-                dropdownToggle.addEventListener('click', function () {
-                    const isExpanded = dropdownMenu.classList.contains('active');
-                    dropdownMenu.classList.toggle('active');
-                    dropdownArrow.classList.toggle('rotate-180');
-                    dropdownToggle.setAttribute('aria-expanded', !isExpanded); // Update aria-expanded
-                });
+        function hideRejectModal() {
+            document.getElementById('rejectModal').classList.add('hidden');
+            document.getElementById('rejectForm').reset();
+            document.getElementById('catatanError').classList.add('hidden'); // Sembunyikan pesan error
+            currentLaporanId = null;
+            document.body.classList.remove('overflow-hidden'); // Restore scrolling
+        }
 
-                // Close dropdown if clicked outside
-                document.addEventListener('click', function (event) {
-                    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                        dropdownMenu.classList.remove('active');
-                        dropdownArrow.classList.remove('rotate-180');
-                        dropdownToggle.setAttribute('aria-expanded', 'false'); // Set aria-expanded to false
-                    }
-                });
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('overflow-hidden'); // Prevent scrolling when sidebar is open
+        }
 
-                // Close dropdown if escape key is pressed
-                document.addEventListener('keydown', function(event) {
-                    if (event.key === 'Escape' && dropdownMenu.classList.contains('active')) {
-                        dropdownMenu.classList.remove('active');
-                        dropdownArrow.classList.remove('rotate-180');
-                        dropdownToggle.setAttribute('aria-expanded', 'false');
-                        dropdownToggle.focus(); // Return focus to the toggle button
-                    }
-                });
+        // Close sidebar if window is resized above mobile breakpoint
+        window.addEventListener('resize', () => {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            if (window.innerWidth >= 768) { // Tailwind's 'md' breakpoint
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('overflow-hidden');
             }
         });
+
+        // Function to show alert on validation button click
+        function confirmValidation() {
+            return confirm("Apakah Anda yakin ingin memvalidasi laporan ini?");
+        }
+
+        // Function to validate the reject form
+        function validateRejectForm() {
+            const catatanInput = document.getElementById('catatan_revisi_bendahara_paroki');
+            const catatanError = document.getElementById('catatanError');
+            const catatanValue = catatanInput.value.trim();
+
+            // Atur ketentuan minimal karakter di sini (misal: 10 karakter)
+            const minLength = 10; 
+
+            if (catatanValue === '' || catatanValue.length < minLength) {
+                catatanError.textContent = `Catatan penolakan tidak boleh kosong dan minimal ${minLength} karakter.`;
+                catatanError.classList.remove('hidden'); // Tampilkan pesan error
+                return false; // Mencegah pengiriman formulir
+            } else {
+                catatanError.classList.add('hidden'); // Sembunyikan pesan error
+                return true; // Izinkan pengiriman formulir
+            }
+        }
     </script>
 </body>
 </html>

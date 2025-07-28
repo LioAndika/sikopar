@@ -69,60 +69,67 @@
         /* Penyesuaian untuk tabel agar terlihat lebih modern */
         .table-responsive {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            /* border-radius: 0.75rem; */ /* HAPUS border-radius untuk sudut kotak */
             overflow: hidden; /* Ensure content is clipped */
             overflow-x: auto; /* Ini penting untuk scroll horizontal */
+            border-radius: 0.75rem; /* Tambahkan border-radius kembali untuk tampilan card yang lebih baik */
         }
 
         .modern-table {
             min-width: 700px; /* **PERUBAHAN: Atur lebar minimum lebih besar lagi untuk mobile** */
             width: 100%; /* Pastikan tabel selalu mencoba mengisi 100% dari parentnya */
             font-size: 0.875rem; /* text-sm untuk seluruh tabel */
+            border-collapse: collapse; /* Penting untuk tampilan tabel yang rapi */
         }
 
         .modern-table thead th {
-            background-color: #e2e8f0; /* bg-gray-200 */
-            color: #4a5568; /* text-gray-700 */
-            font-weight: 600; /* semi-bold */
+            background-color: #eff6ff; /* Warna header yang lebih terang, light blue-50 */
+            color: #1e3a8a; /* Warna teks yang lebih gelap, blue-800 */
+            font-weight: 700; /* Lebih tebal */
             text-transform: uppercase;
-            letter-spacing: 0.05em; /* tracking-wider */
-            border-bottom: 2px solid #cbd5e0; /* border-gray-300 */
-            padding: 0.75rem 1rem; /* py-3 px-4, sedikit lebih besar dari py-2 px-4 sebelumnya */
-            font-size: 0.75rem; /* text-xs untuk header tabel di mobile */
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid #bfdbfe; /* Border bawah yang lebih menonjol */
+            padding: 1rem 1.25rem; /* Padding lebih besar untuk header */
+            font-size: 0.75rem;
+            white-space: nowrap; /* Mencegah teks header wrapping */
         }
+
         .modern-table tbody td {
-            padding: 0.75rem 1rem; /* py-3 px-4, sedikit lebih besar dari py-2 px-4 sebelumnya */
-            border-bottom: 1px solid #edf2f7; /* border-gray-200 */
-            font-size: 0.75rem; /* text-xs untuk sel tabel di mobile */
+            padding: 0.8rem 1.25rem; /* Padding lebih besar untuk sel */
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.875rem; /* Ukuran font standar untuk sel */
+            color: #374151; /* Warna teks yang lebih gelap */
         }
         .modern-table tbody tr:last-child td {
-            border-bottom: none; /* No border for the last row */
+            border-bottom: none;
         }
         .modern-table tbody tr:hover {
-            background-color: #f7fafc; /* bg-gray-50 */
+            background-color: #f0f4f8; /* Hover color yang lebih lembut */
         }
         /* Status Badges */
         .status-badge {
             display: inline-flex;
             align-items: center;
-            padding: 0.2rem 0.5rem; /* Padding lebih kecil lagi untuk badge */
-            border-radius: 9999px; /* full rounded */
-            font-size: 0.625rem; /* text-xs, lebih kecil dari text-sm, bahkan lebih kecil dari sebelumnya */
-            font-weight: 600; /* font-semibold */
+            padding: 0.3rem 0.7rem; /* Padding lebih pas */
+            border-radius: 9999px;
+            font-size: 0.75rem; /* Ukuran font lebih mudah dibaca */
+            font-weight: 600;
             line-height: 1;
             white-space: nowrap;
         }
         .status-pending {
-            background-color: #fefcbf; /* yellow-100 */
-            color: #92400e; /* yellow-700 */
+            background-color: #fffbeb; /* yellow-50 */
+            color: #b45309; /* yellow-800 */
+            border: 1px solid #fcd34d; /* border yellow */
         }
         .status-validated {
-            background-color: #d1fae5; /* green-100 */
-            color: #065f46; /* green-700 */
+            background-color: #ecfdf5; /* green-50 */
+            color: #047857; /* green-800 */
+            border: 1px solid #34d399; /* border green */
         }
         .status-rejected {
-            background-color: #fee2e2; /* red-100 */
-            color: #991b1b; /* red-700 */
+            background-color: #fef2f2; /* red-50 */
+            color: #b91c1c; /* red-800 */
+            border: 1px solid #f87171; /* border red */
         }
 
         /* Mobile-specific styles (max-width: 767px) */
@@ -198,27 +205,28 @@
             }
 
             /* Kartu yang membungkus tabel */
-            .bg-white.p-8.rounded-xl.shadow-md.card-hover-effect {
-                padding: 1rem !important; /* **PERUBAHAN: Padding card ditingkatkan untuk memberi ruang pada tabel** */
+            .bg-white.p-6.md\:p-8.rounded-xl.shadow-md.card-hover-effect {
+                padding: 1rem !important; /* Padding card disesuaikan untuk mobile */
                 width: 100%;
                 box-sizing: border-box;
-                border-radius: 0; /* **PERUBAHAN: Menjadikan sudut card kotak** */
+                border-radius: 0.75rem; /* Tetap ada border-radius untuk tampilan mobile */
             }
 
             /* Tabel responsif akan discroll */
             .table-responsive {
                 width: 100%;
                 box-sizing: border-box;
+                border-radius: 0.5rem; /* Border radius lebih kecil untuk responsif */
             }
             /* Sesuaikan ukuran font di dalam tabel untuk mobile */
             .modern-table thead th,
             .modern-table tbody td {
-                font-size: 0.7rem; /* Lebih kecil lagi untuk sel dan header tabel */
-                padding: 0.4rem 0.6rem; /* **PERUBAHAN: Padding sel tabel sedikit ditingkatkan** */
+                font-size: 0.75rem; /* Lebih kecil lagi untuk sel dan header tabel */
+                padding: 0.6rem 0.8rem; /* Padding sel tabel sedikit ditingkatkan */
             }
             .status-badge {
-                font-size: 0.55rem; /* Badge lebih kecil lagi */
-                padding: 0.15rem 0.4rem;
+                font-size: 0.65rem; /* Badge lebih kecil lagi */
+                padding: 0.2rem 0.5rem;
             }
             
             /* Ukuran font untuk sidebar items di HP */
@@ -269,7 +277,7 @@
                 padding: 2.5rem !important; /* Padding utama kembali ke desktop */
                 width: auto !important;
             }
-            .bg-white.p-8.rounded-xl.shadow-md.card-hover-effect {
+            .bg-white.p-6.md\:p-8.rounded-xl.shadow-md.card-hover-effect {
                 padding: 2rem !important; /* Padding card kembali ke desktop */
                 width: auto !important;
                 border-radius: 0.75rem !important; /* Kembali ke sudut melengkung di desktop */
@@ -331,6 +339,7 @@
                 </button>
                 <h1 class="text-xl md:text-3xl font-extrabold text-gray-800">Status Laporan Kolekte {{ $namaStasi }}</h1>
             </div>
+            {{-- Tombol cetak dihapus --}}
         </header>
 
         {{-- Notifikasi Sukses --}}
@@ -350,7 +359,7 @@
         @endif
 
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-md card-hover-effect">
-            <h1 class="font-semibold text-blue-800 mb-4 md:mb-6 border-b pb-2 md:pb-3 border-gray-200">Daftar Laporan Kolekte Anda</h1>
+            <h2 class="font-semibold text-blue-800 mb-4 md:mb-6 border-b pb-2 md:pb-3 border-gray-200">Daftar Laporan Kolekte Anda</h2>
 
             @if ($laporanKolektes->isEmpty())
                 <p class="text-gray-600 text-sm md:text-lg text-center py-4 md:py-8">Anda belum mengirim laporan kolekte untuk Stasi {{ $namaStasi }}.</p>
@@ -368,7 +377,7 @@
                         <tbody class="text-gray-700">
                             @foreach ($laporanKolektes as $laporan)
                                 <tr>
-                                    <td class="whitespace-nowrap">{{ $laporan->tanggal_kolekte->format('d M Y') }}</td>
+                                    <td class="whitespace-nowrap">{{ \Carbon\Carbon::parse($laporan->tanggal_kolekte)->format('d M Y') }}</td>
                                     <td class="text-right">Rp {{ number_format($laporan->jumlah_kolekte, 2, ',', '.') }}</td>
                                     <td class="text-center">
                                         @if ($laporan->status_ketua_stasi == 'pending')

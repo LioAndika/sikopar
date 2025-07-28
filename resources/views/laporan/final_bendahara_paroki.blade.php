@@ -150,6 +150,7 @@
                 margin-top: 0;
                 page-break-inside: auto;
                 background-color: transparent !important;
+                border: 1px solid #000 !important; /* Border luar tabel */
             }
             thead {
                 display: table-header-group;
@@ -175,6 +176,13 @@
                 text-transform: none !important;
             }
 
+            /* Kolom Jumlah Kolekte di thead/tbody */
+            th:nth-child(4), /* Kolom Jumlah Kolekte di thead */
+            td:nth-child(4) { /* Kolom Jumlah Kolekte di tbody */
+                width: 25% !important; /* Sesuaikan persentase ini sesuai kebutuhan Anda */
+                text-align: right !important;
+            }
+
             .total-row td {
                 font-weight: bold !important;
                 background-color: transparent !important;
@@ -182,13 +190,14 @@
             }
             /* Penyesuaian khusus untuk sel total */
             .total-row td:nth-child(1) {
-                text-align: right; /* "Total Keseluruhan Kolekte:" rata kanan */
-                padding-right: 10px; /* Memberi sedikit ruang */
+                text-align: left; /* PERUBAHAN: "Total Keseluruhan Kolekte:" rata kiri */
+                /* padding-right: 10px; */ /* Dihapus karena text-align: left sudah cukup */
                 border-right: 1px solid #000 !important; /* Pastikan ada border pemisah */
             }
-            .total-row td:nth-child(2) { /* Kolom Jumlah Kolekte */
+            .total-row td:nth-child(2) { /* Kolom Jumlah Kolekte pada baris total */
                 text-align: right;
                 border-left: 1px solid #000 !important; /* Pastikan ada border pemisah */
+                width: 25% !important; /* Pastikan width-nya sama dengan th/td kolom ke-4 */
             }
 
 
@@ -368,7 +377,7 @@
                 padding-top: 0;
                 padding-left: 0.75rem; /* DIKECILKAN: Tambahkan sedikit padding kiri dan kanan */
                 padding-right: 0.75rem; /* DIKECILKAN: Tambahkan sedikit padding kiri dan kanan */
-             
+
             }
              /* Ukuran font untuk sidebar items di HP */
             .sidebar-item {
@@ -387,8 +396,8 @@
                 padding-top: 0.75rem; /* DIKECILKAN */
                 padding-bottom: 0.75rem; /* DIKECILKAN */
             }
-            
-            
+
+
         }
 
         /* Desktop specific styles - reset mobile overrides */
@@ -626,7 +635,7 @@
                         </tbody>
                         <tfoot>
                             <tr class="total-row">
-                                <td colspan="3" class="table-data-cell text-right font-bold">Total Keseluruhan Kolekte:</td>
+                                <td colspan="3" class="table-data-cell font-bold">Total Keseluruhan Kolekte:</td>
                                 <td class="table-data-cell font-bold">Rp {{ number_format($totalKolekte, 2, ',', '.') }}</td>
                             </tr>
                         </tfoot>

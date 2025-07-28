@@ -47,22 +47,26 @@ class KetuaStasiController extends Controller
             $queryPending->where('stasi_id', $stasiIdKetua);
         }
         $laporanKolektesPending = $queryPending->where('status_ketua_stasi', 'pending')
-                                                ->orderBy('tanggal_kolekte', 'asc')
-                                                ->get();
+                                                 ->orderBy('tanggal_kolekte', 'desc')
+                                                 ->orderBy('created_at', 'desc') // Tambahkan baris ini
+                                                 ->get();
 
         // Query untuk laporan yang status_ketua_stasi nya 'divalidasi' atau 'ditolak'
+        // Termasuk laporan yang ditolak ketua stasi (yang otomatis menolak status bendahara/romo)
         $queryProcessed = LaporanKolekte::query();
         if ($stasiIdKetua) {
             $queryProcessed->where('stasi_id', $stasiIdKetua);
         }
         $laporanKolektesProcessed = $queryProcessed->whereIn('status_ketua_stasi', ['divalidasi', 'ditolak'])
-                                                    ->with('createdBy')
-                                                    ->orderBy('tanggal_kolekte', 'desc')
-                                                    ->get();
+                                                     ->with('createdBy')
+                                                     ->orderBy('tanggal_kolekte', 'desc')
+                                                     ->orderBy('created_at', 'desc') // Tambahkan baris ini
+                                                     ->get();
 
         return view('ketua_stasi.laporan.index', compact('laporanKolektesPending', 'laporanKolektesProcessed', 'namaStasi'));
     }
 
+    // ... sisa kode validateLaporan dan rejectLaporan tidak berubah ...
     /**
      * Memvalidasi laporan kolekte oleh Ketua Stasi.
      *
@@ -111,7 +115,7 @@ class KetuaStasiController extends Controller
     public function rejectLaporan(Request $request, LaporanKolekte $laporanKolekte)
     {
         $validatedData = $request->validate([
-            'catatan_revisi_ketua_stasi' => 'required|string|max:500', // <-- UBAH INI
+            'catatan_revisi_ketua_stasi' => 'required|string|max:500',
         ]);
 
         $user = Auth::user();
@@ -130,9 +134,15 @@ class KetuaStasiController extends Controller
         }
 
         $laporanKolekte->status_ketua_stasi = 'ditolak';
-        $laporanKolekte->status_bendahara_paroki = null; // Reset status bendahara paroki jika ditolak
-        $laporanKolekte->status_romo_paroki = null; // Reset status romo paroki jika ditolak
-        $laporanKolekte->catatan_revisi_ketua_stasi = $validatedData['catatan_revisi_ketua_stasi']; // <-- UBAH INI
+        // PERUBAHAN DI SINI: Set status bendahara dan romo paroki menjadi 'ditolak'
+        $laporanKolekte->status_bendahara_paroki = 'ditolak';
+        $laporanKolekte->status_romo_paroki = 'ditolak';
+        
+        $laporanKolekte->catatan_revisi_ketua_stasi = $validatedData['catatan_revisi_ketua_stasi'];
+        // Opsional: Anda mungkin ingin mengosongkan catatan revisi dari bendahara/romo jika ada sebelumnya
+        $laporanKolekte->catatan_revisi_bendahara_paroki = null;
+        $laporanKolekte->catatan_revisi_romo_paroki = null;
+
         $laporanKolekte->save();
 
         return redirect()->route('ketua-stasi.laporan.index')->with('success', 'Laporan kolekte berhasil ditolak.');

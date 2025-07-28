@@ -82,11 +82,10 @@ class LaporanKolekteController extends Controller
      */
     public function indexBendahara()
     {
-
         $user = Auth::user();
         $query = LaporanKolekte::query();
 
-          // Mendapatkan tanggal 7 hari yang lalu dari hari ini
+        // Mendapatkan tanggal 30 hari yang lalu dari hari ini
         $lastDaysAgo = Carbon::today()->subDays(30);
         $query->whereDate('tanggal_kolekte', '>=', $lastDaysAgo);
 
@@ -101,19 +100,22 @@ class LaporanKolekteController extends Controller
                 $q->where('status_ketua_stasi', 'pending') // Menunggu validasi Ketua Stasi
                   ->orWhere('status_ketua_stasi', 'ditolak') // Ditolak oleh Ketua Stasi
                   ->orWhere('status_bendahara_paroki', 'ditolak') // Ditolak oleh Bendahara Paroki
-                  ->orWhere('status_romo_paroki', 'ditolak'); // Ditolak oleh Romo Paroki (ini yang baru)
+                  ->orWhere('status_romo_paroki', 'ditolak') // Ditolak oleh Romo Paroki
+                  ->orWhere('status_bendahara_paroki', 'divalidasi') // TAMBAHKAN INI: Divalidasi oleh Bendahara Paroki
+                  ->orWhere('status_romo_paroki', 'divalidasi'); // TAMBAHKAN INI: Divalidasi oleh Romo Paroki
             });
         }
 
         $laporanKolektes = $query->with('stasi')
                                  ->orderBy('tanggal_kolekte', 'desc')
+                                 ->orderBy('created_at', 'desc')
                                  ->get();
 
         $namaStasi = ($user->isSuperAdmin()) ? 'Semua Stasi' : (Stasi::find($user->stasi_id)->nama ?? 'Tidak Dikenal');
 
-
         return view('laporan.status_bendahara', compact('laporanKolektes', 'namaStasi'));
     }
+
 
     /**
      * Menampilkan daftar laporan yang sudah divalidasi Ketua Stasi DAN belum divalidasi Bendahara Paroki.
@@ -132,7 +134,9 @@ class LaporanKolekteController extends Controller
                                      });
                                });
 
-        $laporanKolektes = $query->with('stasi')
+         $laporanKolektes = $query->with('stasi')
+                                 ->orderBy('tanggal_kolekte', 'desc') // Menambahkan ini
+                                 ->orderBy('created_at', 'desc')     // Menambahkan ini
                                  ->get();
         return view('bendahara_paroki.laporan.index', compact('laporanKolektes'));
     }
@@ -205,7 +209,7 @@ class LaporanKolekteController extends Controller
             $laporanKolekte->catatan_revisi_romo_paroki = null; // Kosongkan catatan romo
             $laporanKolekte->save();
 
-            return redirect()->route('bendahara-paroki.laporan.index')->with('success', 'Laporan kolekte berhasil ditolak oleh Bendahara Paroki dan dikirim kembali ke Ketua Stasi untuk revisi.');
+            return redirect()->route('bendahara-paroki.laporan.index')->with('success', 'Laporan kolekte berhasil ditolak');
         }
 
         return back()->with('error', 'Laporan tidak dapat ditolak atau sudah diproses.');
@@ -217,7 +221,9 @@ class LaporanKolekteController extends Controller
                                ->where('status_bendahara_paroki', 'divalidasi')
                                ->where('status_romo_paroki', 'pending');
 
-        $laporanKolektes = $query->with('stasi')
+       $laporanKolektes = $query->with('stasi')
+                                 ->orderBy('tanggal_kolekte', 'desc') // Menambahkan ini
+                                 ->orderBy('created_at', 'desc')     // Menambahkan ini
                                  ->get();
 
         // Menggunakan view yang benar untuk Bendahara Paroki melihat yang menunggu Romo Paroki
@@ -232,7 +238,9 @@ class LaporanKolekteController extends Controller
                                ->where('status_bendahara_paroki', 'divalidasi')
                                ->where('status_romo_paroki', 'pending'); // Hanya tampilkan yang pending untuk Romo
 
-        $laporanKolektes = $query->with('stasi')
+       $laporanKolektes = $query->with('stasi')
+                                 ->orderBy('tanggal_kolekte', 'desc') // Menambahkan ini
+                                 ->orderBy('created_at', 'desc')     // Menambahkan ini
                                  ->get();
 
         return view('romo_paroki.laporan.index', compact('laporanKolektes'));
@@ -303,7 +311,7 @@ class LaporanKolekteController extends Controller
             $laporanKolekte->save(); // Simpan perubahan ke database
 
             // Setelah ditolak, Romo Paroki seharusnya tidak lagi melihat laporan ini di daftar 'pending'
-            return redirect()->route('romo-paroki.laporan.index')->with('success', 'Laporan kolekte berhasil ditolak oleh Romo Paroki dan dikirim kembali ke Bendahara Paroki untuk revisi.');
+            return redirect()->route('romo-paroki.laporan.index')->with('success', 'Laporan kolekte berhasil ditolak ');
         }
 
         return back()->with('error', 'Laporan tidak dapat ditolak karena statusnya tidak sesuai atau sudah diproses.');
@@ -323,7 +331,9 @@ class LaporanKolekteController extends Controller
                                          ->where('tanggal_kolekte', '>=', $sevenDaysAgo)
                                          ->with('stasi')
                                          ->orderBy('tanggal_kolekte', 'desc')
+                                         ->orderBy('created_at', 'desc')
                                          ->get();
+                                        
         $totalKolekte = $laporanKolektes->sum('jumlah_kolekte');
 
         return view('laporan.final_bendahara_paroki', compact('laporanKolektes', 'totalKolekte'));
@@ -343,6 +353,7 @@ class LaporanKolekteController extends Controller
                                          ->where('tanggal_kolekte', '>=', $sevenDaysAgo)
                                          ->with('stasi')
                                          ->orderBy('tanggal_kolekte', 'desc')
+                                         ->orderBy('created_at', 'desc')
                                          ->get();
         $totalKolekte = $laporanKolektes->sum('jumlah_kolekte');
 
@@ -363,6 +374,7 @@ class LaporanKolekteController extends Controller
                                          ->where('tanggal_kolekte', '>=', $sevenDaysAgo)
                                          ->with('stasi')
                                          ->orderBy('tanggal_kolekte', 'desc')
+                                         ->orderBy('created_at', 'desc')
                                          ->get();
         $totalKolekte = $laporanKolektes->sum('jumlah_kolekte');
 
@@ -409,6 +421,7 @@ class LaporanKolekteController extends Controller
 
         $laporanKolektes = $query->with('stasi')
                                  ->orderBy('tanggal_kolekte', 'desc')
+                                 ->orderBy('created_at', 'desc')
                                  ->paginate(15);
         $totalKolekte = $laporanKolektes->sum('jumlah_kolekte');
 
@@ -454,6 +467,7 @@ class LaporanKolekteController extends Controller
 
         $laporanKolektes = $query->with('stasi')
                                  ->orderBy('tanggal_kolekte', 'desc')
+                                 ->orderBy('created_at', 'desc')
                                  ->paginate(15);
         $totalKolekte = $laporanKolektes->sum('jumlah_kolekte');
 
@@ -499,6 +513,7 @@ class LaporanKolekteController extends Controller
 
         $laporanKolektes = $query->with('stasi')
                                  ->orderBy('tanggal_kolekte', 'desc')
+                                 ->orderBy('created_at', 'desc')
                                  ->paginate(15);
         $totalKolekte = $laporanKolektes->sum('jumlah_kolekte');
 

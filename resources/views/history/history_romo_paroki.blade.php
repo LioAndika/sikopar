@@ -169,7 +169,7 @@
                 padding-top: 0.75rem; /* DIKECILKAN */
                 padding-bottom: 0.75rem; /* DIKECILKAN */
             }
-        
+
             /* Adjust filter form layout for mobile */
             .filter-form-grid {
                 grid-template-columns: 1fr; /* Stack columns on mobile */
@@ -221,7 +221,7 @@
             header .desktop-welcome {
                 display: flex !important; /* Show desktop welcome on desktop */
             }
-        
+
             .filter-form-grid {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Reset to desktop grid */
                 gap: 1rem;
@@ -247,24 +247,37 @@
         }
 
         /* --- PRINT STYLES --- */
-          @media screen {
-                .knowing-text {
+        @media screen {
+            .knowing-text {
                 display: none !important;
-                }}
+            }
+            .signature-section, .printed-by { /* Hide these in screen view */
+                display: none !important;
+            }
+        }
         @media print {
             body {
-        font-size: 10px;
-        background: white;
-    }
-
-
-    /* Atur margin agar rapi di print */
-    @page {
-        margin: 1cm;
-    }
-            .knowing-text {
-            display: block !important;
+                font-size: 10px;
+                background: white;
+                margin: 0; /* Ensure no default body margin */
+                padding: 0; /* Ensure no default body padding */
             }
+
+            /* Atur margin agar rapi di print */
+            @page {
+                margin: 1cm;
+                size: A4 portrait; /* Specify page size and orientation */
+            }
+            .knowing-text {
+                display: block !important;
+            }
+            .signature-section { /* Ensure this is shown in print */
+                display: flex !important;
+            }
+            .printed-by { /* Ensure this is shown in print */
+                display: block !important;
+            }
+
 
             /* Hide elements not needed for printing */
             .sidebar-container,
@@ -273,8 +286,12 @@
             .filter-form-grid, /* Hide the filter form */
             .filter-buttons, /* Hide filter buttons */
             .pagination, /* Hide pagination links */
-            .print-hidden /* Any element with this class will be hidden */
-             {
+            .print-hidden, /* Any element with this class will be hidden */
+            /* Classes to hide specific columns */
+            .hide-on-print-status-ketua,
+            .hide-on-print-status-bendahara,
+            .hide-on-print-status-romo
+            {
                 display: none !important;
             }
 
@@ -306,19 +323,19 @@
             }
 
             .letterhead img {
-                 max-width: 100px;
+                max-width: 100px;
                 height: auto;
                 margin-right: 20px; /* Beri jarak antara logo dan teks */
                 margin-bottom: 0; /* Pastikan margin-bottom tidak ada */
             }
 
             .letterhead-text {
-                text-align: center; /* Teks rata kiri */
+                text-align: left; /* Teks rata kiri */
                 margin-left:100px;
             }
 
             .letterhead-text h2 {
-                 font-size: 14pt;
+                font-size: 14pt;
                 font-weight: bold;
                 margin: 0;
                 color: #000;
@@ -339,31 +356,43 @@
             }
 
             /* Adjust table appearance for printing */
-            .responsive-table {
-                width: 100% !important;
-                border-collapse: collapse !important; /* Ensure borders are collapsed */
-                font-size: 10pt !important; /* Adjust font size for print */
-                margin-top: 20px; /* Jarak dari kop surat */
-            }
+             .responsive-table {
+        width: 100% !important;
+        border-collapse: collapse !important; /* Ensure borders are collapsed */
+        font-size: 10pt !important; /* Adjust font size for print */
+        margin-top: 20px; /* Jarak dari kop surat */
+        border: 1px solid #000 !important; /* Add border to the entire table for outer borders */
+    }
 
-            .responsive-table th,
-            .responsive-table td {
-                border: 1px solid #000 !important; /* Solid black borders for print */
-                padding: 6px 10px !important; /* Adjust padding for print */
-                white-space: normal !important; /* Allow text to wrap */
-                color: #000 !important; /* Ensure text is black */
-            }
-             .responsive-table th {
-                background-color: #ffffffff !important; /* Light grey background for header */
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
+    .responsive-table th,
+    .responsive-table td {
+        border: 1px solid #000 !important; /* Set all borders to 1px solid black */
+        padding: 6px 10px !important; /* Adjust padding for print */
+        white-space: normal !important; /* Allow text to wrap */
+        color: #000 !important; /* Ensure text is black */
+    }
 
-            .responsive-table tfoot {
-                background-color: #e0e0e0 !important; /* Slightly darker grey for footer */
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
+    .responsive-table th {
+        background-color: #ffffff !important; /* White background for header */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Remove specific border-bottom overrides if not needed, as `border: 1px solid #000 !important;` will handle all sides */
+    .responsive-table td {
+        /* border-bottom: 0.5px solid #eee !important; */ /* Remove this line */
+    }
+
+    .responsive-table tr:last-child td {
+        /* border-bottom: none !important; */ /* Remove this line */
+    }
+
+    .responsive-table tfoot {
+        background-color: #ffffff !important; /* White background for footer */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        /* border-top: 1px solid #000 !important; */ /* This might be redundant if the td/th have borders */
+    }
 
             /* Ensure image in sidebar brand is hidden if accidentally shown */
             .sidebar-brand img {
@@ -380,13 +409,13 @@
                 display: none !important;
             }
 
-            /* Status badge specific print styles */
+            /* Status badge specific print styles (will be hidden anyway, but just in case) */
             .px-1\.5.py-0\.5.rounded-full.text-xs.font-semibold {
                 background: transparent !important; /* Remove background for status badges */
                 color: #000 !important; /* Ensure black text for status */
-                border: 1px solid #ccc !important; /* Add border for definition */
-                padding: 2px 5px !important;
-                border-radius: 5px !important;
+                border: none !important; /* Remove border */
+                padding: 0 !important; /* Remove padding */
+                border-radius: 0 !important; /* Remove border radius */
             }
             .text-right {
                 text-align: right !important;
@@ -418,7 +447,7 @@
                 display: inline-block; /* Ensure border only covers the name */
                 font-weight: bold;
             }
-                 /* Gaya untuk teks "Mengetahui" di atas tanda tangan */
+            /* Gaya untuk teks "Mengetahui" di atas tanda tangan */
             .knowing-text {
                 text-align: center;
                 font-weight: bold;
@@ -428,7 +457,6 @@
                 display: block;
                 width: 100%;
             }
-
 
             .print-date {
                 text-align: right;
@@ -450,13 +478,25 @@
                 box-shadow: none !important;
                 border: none !important;
             }
+            /* Style for the digital signature box in print */
+            .digital-signature-box {
+                border: none !important; /* Remove border in print */
+                width: 150px;
+                height: 70px;
+                margin: 10px auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.8em;
+                color: #777;
+            }
         }
     </style>
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal min-h-screen flex flex-col md:flex-row">
     <div id="sidebar-overlay" class="overlay" onclick="toggleSidebar()"></div>
 
-  {{-- Sidebar Romo Paroki --}}
+    {{-- Sidebar Romo Paroki --}}
     <div id="sidebar" class="sidebar-container flex-none w-full md:w-64 pb-4 md:pb-0 shadow-lg z-10 md:relative">
         <div class="p-6 text-center text-2xl font-extrabold sidebar-brand">
             <img src="{{ asset('images/logo.jpg') }}" alt="Logo Paroki">
@@ -501,7 +541,7 @@
                 </button>
                 <h1 class="text-4xl font-extrabold text-gray-800">Riwayat Laporan Kolekte Final</h1>
             </div>
-          
+
         </header>
 
         @if (session('success'))
@@ -541,20 +581,20 @@
                 <div>
                     <label for="search" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Cari (Nama Pengirim/Stasi)</label>
                     <input type="text" name="search" id="search" placeholder="Cari laporan..."
-                           value="{{ request('search') }}"
-                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm py-1.5 px-2">
+                            value="{{ request('search') }}"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm py-1.5 px-2">
                 </div>
                 <div>
                     <label for="start_date" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Dari Tanggal</label>
                     <input type="date" name="start_date" id="start_date"
-                           value="{{ request('start_date') }}"
-                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm py-1.5 px-2">
+                            value="{{ request('start_date') }}"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm py-1.5 px-2">
                 </div>
                 <div>
                     <label for="end_date" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Sampai Tanggal</label>
                     <input type="date" name="end_date" id="end_date"
-                           value="{{ request('end_date') }}"
-                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm py-1.5 px-2">
+                            value="{{ request('end_date') }}"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm py-1.5 px-2">
                 </div>
                 <div>
                     <label for="stasi_id" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Filter Stasi</label>
@@ -594,25 +634,25 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <th scope="col" class="py-2 px-3 md:py-3 md:px-6">Tanggal Kolekte</th>
-                            <th scope="col" class="py-2 px-3 md:py-3 md:px-6">Jumlah Kolekte</th>
                             <th scope="col" class="py-2 px-3 md:py-3 md:px-6">Stasi</th>
                             <th scope="col" class="py-2 px-3 md:py-3 md:px-6">Nama Pengirim</th>
-                            <th scope="col" class="py-2 px-3 md:py-3 md:px-6">Status Ketua Stasi</th>
-                            <th scope="col" class="py-2 px-3 md:py-3 md:px-6">Status Bendahara Paroki</th>
-                            <th scope="col" class="py-2 px-3 md:py-3 md:px-6">Status Romo Paroki</th>
-                            <th scope="col" class="py-2 px-3 md:py-3 md:px-6">Keterangan</th>
+                            <th scope="col" class="py-2 px-3 md:py-3 md:px-6">Jumlah Kolekte</th>
+                            <th scope="col" class="py-2 px-3 md:py-3 md:px-6 hide-on-print-status-ketua">Status Ketua Stasi</th>
+                            <th scope="col" class="py-2 px-3 md:py-3 md:px-6 hide-on-print-status-bendahara">Status Bendahara Paroki</th>
+                            <th scope="col" class="py-2 px-3 md:py-3 md:px-6 hide-on-print-status-romo">Status Romo Paroki</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($laporanKolektes as $laporan)
                             <tr class="bg-white border-b hover:bg-gray-50">
                                 <td class="py-2 px-3 md:py-4 md:px-6 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ \Carbon\Carbon::parse($laporan->tanggal_kolekte)->format('d M Y') }}
+                                    {{ \Carbon\Carbon::parse($laporan->tanggal_kolekte)->translatedFormat('d M Y') }}
                                 </td>
-                                <td class="py-2 px-3 md:py-4 md:px-6">Rp {{ number_format($laporan->jumlah_kolekte, 0, ',', '.') }}</td>
                                 <td class="py-2 px-3 md:py-4 md:px-6">{{ $laporan->stasi->nama ?? 'N/A' }}</td>
                                 <td class="py-2 px-3 md:py-4 md:px-6">{{ $laporan->nama_pengirim }}</td>
-                                <td class="py-2 px-3 md:py-4 md:px-6">
+                                <td class="py-2 px-3 md:py-4 md:px-6">Rp {{ number_format($laporan->jumlah_kolekte, 0, ',', '.') }}</td>
+                                <td class="py-2 px-3 md:py-4 md:px-6 hide-on-print-status-ketua">
                                     <span class="px-1.5 py-0.5 rounded-full text-xs font-semibold
                                         @if($laporan->status_ketua_stasi == 'divalidasi') bg-green-200 text-green-800
                                         @elseif($laporan->status_ketua_stasi == 'menunggu_validasi') bg-yellow-200 text-yellow-800
@@ -620,7 +660,7 @@
                                         {{ ucfirst(str_replace('_', ' ', $laporan->status_ketua_stasi)) }}
                                     </span>
                                 </td>
-                                <td class="py-2 px-3 md:py-4 md:px-6">
+                                <td class="py-2 px-3 md:py-4 md:px-6 hide-on-print-status-bendahara">
                                     <span class="px-1.5 py-0.5 rounded-full text-xs font-semibold
                                         @if($laporan->status_bendahara_paroki == 'divalidasi') bg-green-200 text-green-800
                                         @elseif($laporan->status_bendahara_paroki == 'menunggu_validasi') bg-yellow-200 text-yellow-800
@@ -628,7 +668,7 @@
                                         {{ ucfirst(str_replace('_', ' ', $laporan->status_bendahara_paroki)) }}
                                     </span>
                                 </td>
-                                <td class="py-2 px-3 md:py-4 md:px-6">
+                                <td class="py-2 px-3 md:py-4 md:px-6 hide-on-print-status-romo">
                                     <span class="px-1.5 py-0.5 rounded-full text-xs font-semibold
                                         @if($laporan->status_romo_paroki == 'divalidasi') bg-green-200 text-green-800
                                         @elseif($laporan->status_romo_paroki == 'menunggu_validasi') bg-yellow-200 text-yellow-800
@@ -636,7 +676,6 @@
                                         {{ ucfirst(str_replace('_', ' ', $laporan->status_romo_paroki)) }}
                                     </span>
                                 </td>
-                                <td class="py-2 px-3 md:py-4 md:px-6 max-w-[150px] truncate">{{ $laporan->keterangan ?? '-' }}</td>
                             </tr>
                         @empty
                             <tr>
@@ -656,20 +695,18 @@
             {{-- Tanggal Cetak dan Tanda Tangan --}}
             <div class="print-area">
                 <div class="print-date">Purwokerto, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</div>
-                <div class="knowing-text">Mengetahui,</div>
+                <div class="knowing-text" style="display: none;">Mengetahui,</div> {{-- Set to display:none by default, only print shows it --}}
                 <div class="signature-section" style="display: none;">
                     <div class="signature-block">
-                        
                         <p class="signer-title">Romo Paroki</p>
-                        <div class="digital-signature-box" style="border: 1px solid #ccc; width: 150px; height: 70px; margin: 10px auto; display: flex; align-items: center; justify-content: center; font-size: 0.8em; color: #777;">
+                        <div class="digital-signature-box">
                             Tanda Tangan Digital
                         </div>
                         <div class="name">RD. Andreas Surya Purnawan Br</div>
                     </div>
                     <div class="signature-block">
-                        
                         <p class="signer-title">Bendahara Paroki</p>
-                        <div class="digital-signature-box" style="border: 1px solid #ccc; width: 150px; height: 70px; margin: 10px auto; display: flex; align-items: center; justify-content: center; font-size: 0.8em; color: #777;">
+                        <div class="digital-signature-box">
                             Tanda Tangan Digital
                         </div>
                         <div class="name">Fransiska Linawati</div>
